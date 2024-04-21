@@ -96,7 +96,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\AirlineTicket\src\main\java\images\ticket.png"/>
+          <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\Airplane_Ticket\src\main\java\images\ticket.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value=" Danh s&#xe1;ch lo&#x1ea1;i v&#xe9;"/>
       </Properties>
@@ -149,7 +149,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\AirlineTicket\src\main\java\images\print.png"/>
+          <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\Airplane_Ticket\src\main\java\images\print.png"/>
         </Property>
       </Properties>
     </Component>
@@ -159,7 +159,7 @@
           <Color blue="ff" green="99" red="0" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\AirlineTicket\src\main\java\images\download.png"/>
+          <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\Airplane_Ticket\src\main\java\images\download.png"/>
         </Property>
       </Properties>
     </Component>

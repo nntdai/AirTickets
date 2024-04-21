@@ -29,6 +29,7 @@ public class Download_Dialog extends java.awt.Dialog {
         jPanel1 = new javax.swing.JPanel();
         jFileChooser1 = new javax.swing.JFileChooser();
 
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);

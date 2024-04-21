@@ -44,15 +44,17 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" max="-2" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jComboBox1" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTextField1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="332" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton3" pref="36" max="32767" attributes="0"/>
+              <Component id="jButton3" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -91,7 +93,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\AirlineTicket\src\main\java\images\employees.png"/>
+              <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\Airplane_Ticket\src\main\java\images\employees.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value=" Danh s&#xe1;ch nh&#xe2;n vi&#xea;n"/>
           </Properties>
@@ -102,7 +104,7 @@
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\AirlineTicket\src\main\java\images\print.png"/>
+              <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\Airplane_Ticket\src\main\java\images\print.png"/>
             </Property>
           </Properties>
         </Component>
@@ -112,7 +114,7 @@
               <Color blue="ff" green="99" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\AirlineTicket\src\main\java\images\download.png"/>
+              <Image iconType="2" name="C:\Users\User\OneDrive101203\Documents\NetBeansProjects\Airplane_Ticket\src\main\java\images\download.png"/>
             </Property>
           </Properties>
           <Events>
