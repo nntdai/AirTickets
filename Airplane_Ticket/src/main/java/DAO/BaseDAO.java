@@ -1,10 +1,8 @@
 package DAO;
 
-import DTO.MayBayDTO;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class BaseDAO {
     private static String jdbcURL = "jdbc:mysql://localhost:3307/ticketmanager";   // tên database
