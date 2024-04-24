@@ -3,17 +3,17 @@ package DTO;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class HoanVe {
+public class HoanVeDTO {
     private int id;
-    private int idVeMayBay;
+    private VeMayBayDTO idVeMayBay;
     private BigDecimal phiHoanVe;
     private String lyDoHoan;
     private LocalDateTime ngayHoan;
 
-    public HoanVe() {
+    public HoanVeDTO() {
     }
 
-    public HoanVe(int id, int idVeMayBay, BigDecimal phiHoanVe, String lyDoHoan, LocalDateTime ngayHoan) {
+    public HoanVeDTO(int id, VeMayBayDTO idVeMayBay, BigDecimal phiHoanVe, String lyDoHoan, LocalDateTime ngayHoan) {
         this.id = id;
         this.idVeMayBay = idVeMayBay;
         this.phiHoanVe = phiHoanVe;
@@ -29,11 +29,11 @@ public class HoanVe {
         this.id = id;
     }
 
-    public int getIdVeMayBay() {
+    public VeMayBayDTO getIdVeMayBay() {
         return idVeMayBay;
     }
 
-    public void setIdVeMayBay(int idVeMayBay) {
+    public void setIdVeMayBay(VeMayBayDTO idVeMayBay) {
         this.idVeMayBay = idVeMayBay;
     }
 
@@ -60,5 +60,4 @@ public class HoanVe {
     public void setNgayHoan(LocalDateTime ngayHoan) {
         this.ngayHoan = ngayHoan;
     }
-
 }

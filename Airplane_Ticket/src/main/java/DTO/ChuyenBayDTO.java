@@ -3,21 +3,21 @@ package DTO;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class ChuyenBay {
+public class ChuyenBayDTO {
     private int id;
-    private int idMayBay;
-    private String maSanBayDi;
-    private String maSanBayDen;
+    private MayBayDTO idMayBay;
+    private SanBayDTO maSanBayDi;
+    private SanBayDTO maSanBayDen;
     private LocalDateTime ngayDi;
     private LocalDateTime ngayDen;
     private LocalTime thoiGianBay;
     private String ghiChu;
     private byte tinhTrang;
 
-    public ChuyenBay() {
+    public ChuyenBayDTO() {
     }
 
-    public ChuyenBay(int id, int idMayBay, String maSanBayDi, String maSanBayDen, LocalDateTime ngayDi, LocalDateTime ngayDen, LocalTime thoiGianBay, String ghiChu, byte tinhTrang) {
+    public ChuyenBayDTO(int id, MayBayDTO idMayBay, SanBayDTO maSanBayDi, SanBayDTO maSanBayDen, LocalDateTime ngayDi, LocalDateTime ngayDen, LocalTime thoiGianBay, String ghiChu, byte tinhTrang) {
         this.id = id;
         this.idMayBay = idMayBay;
         this.maSanBayDi = maSanBayDi;
@@ -37,27 +37,27 @@ public class ChuyenBay {
         this.id = id;
     }
 
-    public int getIdMayBay() {
+    public MayBayDTO getIdMayBay() {
         return idMayBay;
     }
 
-    public void setIdMayBay(int idMayBay) {
+    public void setIdMayBay(MayBayDTO idMayBay) {
         this.idMayBay = idMayBay;
     }
 
-    public String getMaSanBayDi() {
+    public SanBayDTO getMaSanBayDi() {
         return maSanBayDi;
     }
 
-    public void setMaSanBayDi(String maSanBayDi) {
+    public void setMaSanBayDi(SanBayDTO maSanBayDi) {
         this.maSanBayDi = maSanBayDi;
     }
 
-    public String getMaSanBayDen() {
+    public SanBayDTO getMaSanBayDen() {
         return maSanBayDen;
     }
 
-    public void setMaSanBayDen(String maSanBayDen) {
+    public void setMaSanBayDen(SanBayDTO maSanBayDen) {
         this.maSanBayDen = maSanBayDen;
     }
 

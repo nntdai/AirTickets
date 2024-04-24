@@ -1,16 +1,16 @@
 package DTO;
 
-public class VeMayBay {
+public class VeMayBayDTO {
     private int id;
-    private int idHoaDonVeBan;
-    private String idKhachHang;
-    private int idLoaiVeMayBay;
+    private HoaDonVeBanDTO idHoaDonVeBan;
+    private KhachHangDTO idKhachHang;
+    private LoaiVeMayBayDTO idLoaiVeMayBay;
     private byte tinhTrang;
 
-    public VeMayBay() {
+    public VeMayBayDTO() {
     }
 
-    public VeMayBay(int id, int idHoaDonVeBan, String idKhachHang, int idLoaiVeMayBay, byte tinhTrang) {
+    public VeMayBayDTO(int id, HoaDonVeBanDTO idHoaDonVeBan, KhachHangDTO idKhachHang, LoaiVeMayBayDTO idLoaiVeMayBay, byte tinhTrang) {
         this.id = id;
         this.idHoaDonVeBan = idHoaDonVeBan;
         this.idKhachHang = idKhachHang;
@@ -26,27 +26,27 @@ public class VeMayBay {
         this.id = id;
     }
 
-    public int getIdHoaDonVeBan() {
+    public HoaDonVeBanDTO getIdHoaDonVeBan() {
         return idHoaDonVeBan;
     }
 
-    public void setIdHoaDonVeBan(int idHoaDonVeBan) {
+    public void setIdHoaDonVeBan(HoaDonVeBanDTO idHoaDonVeBan) {
         this.idHoaDonVeBan = idHoaDonVeBan;
     }
 
-    public String getIdKhachHang() {
+    public KhachHangDTO getIdKhachHang() {
         return idKhachHang;
     }
 
-    public void setIdKhachHang(String idKhachHang) {
+    public void setIdKhachHang(KhachHangDTO idKhachHang) {
         this.idKhachHang = idKhachHang;
     }
 
-    public int getIdLoaiVeMayBay() {
+    public LoaiVeMayBayDTO getIdLoaiVeMayBay() {
         return idLoaiVeMayBay;
     }
 
-    public void setIdLoaiVeMayBay(int idLoaiVeMayBay) {
+    public void setIdLoaiVeMayBay(LoaiVeMayBayDTO idLoaiVeMayBay) {
         this.idLoaiVeMayBay = idLoaiVeMayBay;
     }
 

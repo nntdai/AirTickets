@@ -1,11 +1,11 @@
 package DTO;
 
-public class SanBay {
+public class SanBayDTO {
     private String maSanBay;
     private String ten;
     private byte status;
 
-    public SanBay() {
+    public SanBayDTO() {
     }
 
     public String getMaSanBay() {

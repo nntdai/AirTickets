@@ -2,17 +2,17 @@ package DTO;
 
 import java.time.LocalDateTime;
 
-public class TaiKhoan {
+public class TaiKhoanDTO {
     private String username;
     private String password;
     private LocalDateTime ngayCap;
     private byte tinhTrang;
-    private String cmndNhanVien;
+    private NhanVienDTO cmndNhanVien;
 
-    public TaiKhoan() {
+    public TaiKhoanDTO() {
     }
 
-    public TaiKhoan(String username, String password, LocalDateTime ngayCap, byte tinhTrang, String cmndNhanVien) {
+    public TaiKhoanDTO(String username, String password, LocalDateTime ngayCap, byte tinhTrang, NhanVienDTO cmndNhanVien) {
         this.username = username;
         this.password = password;
         this.ngayCap = ngayCap;
@@ -52,11 +52,11 @@ public class TaiKhoan {
         this.tinhTrang = tinhTrang;
     }
 
-    public String getCmndNhanVien() {
+    public NhanVienDTO getCmndNhanVien() {
         return cmndNhanVien;
     }
 
-    public void setCmndNhanVien(String cmndNhanVien) {
+    public void setCmndNhanVien(NhanVienDTO cmndNhanVien) {
         this.cmndNhanVien = cmndNhanVien;
     }
 }

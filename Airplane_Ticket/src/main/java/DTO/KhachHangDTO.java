@@ -2,20 +2,20 @@ package DTO;
 
 import java.time.LocalDateTime;
 
-public class KhachHang {
+public class KhachHangDTO {
     private String cmnd;
     private String hoTen;
     private String soDienThoai;
     private String diaChi;
     private LocalDateTime ngaySinh;
     private int diemTichLuy;
-    private int idHangThanThiet;
+    private HangThanThietDTO idHangThanThiet;
     private byte tinhTrang;
 
-    public KhachHang() {
+    public KhachHangDTO() {
     }
 
-    public KhachHang(String cmnd, String hoTen, String soDienThoai, String diaChi, LocalDateTime ngaySinh, int diemTichLuy, int idHangThanThiet, byte tinhTrang) {
+    public KhachHangDTO(String cmnd, String hoTen, String soDienThoai, String diaChi, LocalDateTime ngaySinh, int diemTichLuy, HangThanThietDTO idHangThanThiet, byte tinhTrang) {
         this.cmnd = cmnd;
         this.hoTen = hoTen;
         this.soDienThoai = soDienThoai;
@@ -74,11 +74,11 @@ public class KhachHang {
         this.diemTichLuy = diemTichLuy;
     }
 
-    public int getIdHangThanThiet() {
+    public HangThanThietDTO getIdHangThanThiet() {
         return idHangThanThiet;
     }
 
-    public void setIdHangThanThiet(int idHangThanThiet) {
+    public void setIdHangThanThiet(HangThanThietDTO idHangThanThiet) {
         this.idHangThanThiet = idHangThanThiet;
     }
 

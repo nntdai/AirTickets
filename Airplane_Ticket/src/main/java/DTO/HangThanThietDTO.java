@@ -1,15 +1,15 @@
 package DTO;
 
-public class HangThanThiet {
+public class HangThanThietDTO {
     private int id;
     private String tenHang;
     private int diemTichLuy;
     private int khuyenMai;
 
-    public HangThanThiet() {
+    public HangThanThietDTO() {
     }
 
-    public HangThanThiet(int id, String tenHang, int diemTichLuy, int khuyenMai) {
+    public HangThanThietDTO(int id, String tenHang, int diemTichLuy, int khuyenMai) {
         this.id = id;
         this.tenHang = tenHang;
         this.diemTichLuy = diemTichLuy;

@@ -2,7 +2,7 @@ package DTO;
 
 import java.time.LocalDateTime;
 
-public class NhanVien {
+public class NhanVienDTO {
     private String cmnd;
     private String soDienThoai;
     private String ho;
@@ -11,10 +11,10 @@ public class NhanVien {
     private byte GioiTinh;
     private byte TinhTrang;
 
-    public NhanVien() {
+    public NhanVienDTO() {
     }
 
-    public NhanVien(String cmnd, String soDienThoai, String ho, String ten, LocalDateTime ngaySinh, byte gioiTinh, byte tinhTrang) {
+    public NhanVienDTO(String cmnd, String soDienThoai, String ho, String ten, LocalDateTime ngaySinh, byte gioiTinh, byte tinhTrang) {
         this.cmnd = cmnd;
         this.soDienThoai = soDienThoai;
         this.ho = ho;

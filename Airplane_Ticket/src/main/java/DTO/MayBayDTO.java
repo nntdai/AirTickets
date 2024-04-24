@@ -1,16 +1,16 @@
 package DTO;
 
-public class MayBay {
+public class MayBayDTO {
     private int id;
     private String ten;
     private int soGheH1;
     private int soGheH2;
     private byte status;
 
-    public MayBay() {
+    public MayBayDTO() {
     }
 
-    public MayBay(int id, String ten, int soGheH1, int soGheH2, byte status) {
+    public MayBayDTO(int id, String ten, int soGheH1, int soGheH2, byte status) {
         this.id = id;
         this.ten = ten;
         this.soGheH1 = soGheH1;

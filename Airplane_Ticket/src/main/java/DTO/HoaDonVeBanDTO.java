@@ -3,18 +3,18 @@ package DTO;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class HoaDonVeBan {
+public class HoaDonVeBanDTO {
     private int id;
-    private String idNhanVien;
-    private String idKhachHangLapHoaDon;
+    private NhanVienDTO idNhanVien;
+    private KhachHangDTO idKhachHangLapHoaDon;
     private LocalDateTime ngayLapHoaDon;
     private BigDecimal tongTien;
     private byte tinhTrang;
 
-    public HoaDonVeBan() {
+    public HoaDonVeBanDTO() {
     }
 
-    public HoaDonVeBan(int id, String idNhanVien, String idKhachHangLapHoaDon, LocalDateTime ngayLapHoaDon, BigDecimal tongTien, byte tinhTrang) {
+    public HoaDonVeBanDTO(int id, NhanVienDTO idNhanVien, KhachHangDTO idKhachHangLapHoaDon, LocalDateTime ngayLapHoaDon, BigDecimal tongTien, byte tinhTrang) {
         this.id = id;
         this.idNhanVien = idNhanVien;
         this.idKhachHangLapHoaDon = idKhachHangLapHoaDon;
@@ -31,19 +31,19 @@ public class HoaDonVeBan {
         this.id = id;
     }
 
-    public String getIdNhanVien() {
+    public NhanVienDTO getIdNhanVien() {
         return idNhanVien;
     }
 
-    public void setIdNhanVien(String idNhanVien) {
+    public void setIdNhanVien(NhanVienDTO idNhanVien) {
         this.idNhanVien = idNhanVien;
     }
 
-    public String getIdKhachHangLapHoaDon() {
+    public KhachHangDTO getIdKhachHangLapHoaDon() {
         return idKhachHangLapHoaDon;
     }
 
-    public void setIdKhachHangLapHoaDon(String idKhachHangLapHoaDon) {
+    public void setIdKhachHangLapHoaDon(KhachHangDTO idKhachHangLapHoaDon) {
         this.idKhachHangLapHoaDon = idKhachHangLapHoaDon;
     }
 

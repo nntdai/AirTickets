@@ -2,19 +2,19 @@ package DTO;
 
 import java.math.BigDecimal;
 
-public class LoaiVeMayBay {
+public class LoaiVeMayBayDTO {
     private int id;
-    private int idChuyenBay;
+    private ChuyenBayDTO idChuyenBay;
     private String hangVe;
     private BigDecimal giaVe;
     private int soLuongVeTong;
     private int soLuongVeCon;
     private byte tinhTrang;
 
-    public LoaiVeMayBay() {
+    public LoaiVeMayBayDTO() {
     }
 
-    public LoaiVeMayBay(int id, int idChuyenBay, String hangVe, BigDecimal giaVe, int soLuongVeTong, int soLuongVeCon, byte tinhTrang) {
+    public LoaiVeMayBayDTO(int id, ChuyenBayDTO idChuyenBay, String hangVe, BigDecimal giaVe, int soLuongVeTong, int soLuongVeCon, byte tinhTrang) {
         this.id = id;
         this.idChuyenBay = idChuyenBay;
         this.hangVe = hangVe;
@@ -32,11 +32,11 @@ public class LoaiVeMayBay {
         this.id = id;
     }
 
-    public int getIdChuyenBay() {
+    public ChuyenBayDTO getIdChuyenBay() {
         return idChuyenBay;
     }
 
-    public void setIdChuyenBay(int idChuyenBay) {
+    public void setIdChuyenBay(ChuyenBayDTO idChuyenBay) {
         this.idChuyenBay = idChuyenBay;
     }
 
