@@ -1,8 +1,10 @@
 package DAO;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import DTO.MayBayDTO;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseDAO {
     private static String jdbcURL = "jdbc:mysql://localhost:3307/ticketmanager";   // tên database
@@ -13,7 +15,7 @@ public class BaseDAO {
     public static Connection getConnection() {   // phương thức kết nối database
         if (connection == null) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
@@ -26,5 +28,4 @@ public class BaseDAO {
         connection.close();
         connection = null;
     }
-
 }
