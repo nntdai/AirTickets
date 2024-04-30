@@ -37,6 +37,7 @@ public class HomePage extends javax.swing.JFrame {
         bill_Panel1 = new GUI.Bill_Panel();
         bill_Panel2 = new GUI.Bill_Panel();
         mayBay_Panel1 = new GUI.MayBay_Panel();
+        sanBay_Panel1 = new GUI.SanBay_Panel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -85,6 +86,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Hóa đơn", bill_Panel1);
         jTabbedPane1.addTab("Máy bay", mayBay_Panel1);
+        jTabbedPane1.addTab("Sân bay", sanBay_Panel1);
 
         getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
         jTabbedPane1.getAccessibleContext().setAccessibleParent(jTabbedPane1);
@@ -194,6 +196,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private GUI.MayBay_Panel mayBay_Panel1;
+    private GUI.SanBay_Panel sanBay_Panel1;
     private GUI.Staff staff1;
     private GUI.ThongKe thongKe1;
     private GUI.Ticket_Type_Panel ticket_Type_Panel1;
