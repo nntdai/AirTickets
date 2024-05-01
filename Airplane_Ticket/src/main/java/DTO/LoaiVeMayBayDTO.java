@@ -9,12 +9,12 @@ public class LoaiVeMayBayDTO {
     private BigDecimal giaVe;
     private int soLuongVeTong;
     private int soLuongVeCon;
-    private byte tinhTrang;
+    private boolean tinhTrang;
 
     public LoaiVeMayBayDTO() {
     }
 
-    public LoaiVeMayBayDTO(int id, ChuyenBayDTO idChuyenBay, String hangVe, BigDecimal giaVe, int soLuongVeTong, int soLuongVeCon, byte tinhTrang) {
+    public LoaiVeMayBayDTO(int id, ChuyenBayDTO idChuyenBay, String hangVe, BigDecimal giaVe, int soLuongVeTong, int soLuongVeCon, boolean tinhTrang) {
         this.id = id;
         this.idChuyenBay = idChuyenBay;
         this.hangVe = hangVe;
@@ -72,11 +72,11 @@ public class LoaiVeMayBayDTO {
         this.soLuongVeCon = soLuongVeCon;
     }
 
-    public byte getTinhTrang() {
+    public boolean isTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(byte tinhTrang) {
+    public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 }

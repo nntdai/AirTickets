@@ -3,9 +3,15 @@ package DTO;
 public class SanBayDTO {
     private String maSanBay;
     private String ten;
-    private byte status;
+    private boolean status;
 
     public SanBayDTO() {
+    }
+
+    public SanBayDTO(String maSanBay, String ten, boolean status) {
+        this.maSanBay = maSanBay;
+        this.ten = ten;
+        this.status = status;
     }
 
     public String getMaSanBay() {
@@ -24,11 +30,11 @@ public class SanBayDTO {
         this.ten = ten;
     }
 
-    public byte getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }
