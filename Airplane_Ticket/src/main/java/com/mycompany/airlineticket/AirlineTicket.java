@@ -15,7 +15,6 @@ public class AirlineTicket {
 
     public static void main(String[] args) {
         HomePage hp=new HomePage();
-        hp.setLocationRelativeTo(null);
         hp.setVisible(true);
     }
 }
