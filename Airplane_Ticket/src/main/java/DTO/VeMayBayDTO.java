@@ -5,16 +5,18 @@ public class VeMayBayDTO {
     private HoaDonVeBanDTO idHoaDonVeBan;
     private KhachHangDTO idKhachHang;
     private LoaiVeMayBayDTO idLoaiVeMayBay;
-    private byte tinhTrang;
+    private LoaiVeMayBayDTO idLoaiVeMayVe;
+    private boolean tinhTrang;
 
     public VeMayBayDTO() {
     }
 
-    public VeMayBayDTO(int id, HoaDonVeBanDTO idHoaDonVeBan, KhachHangDTO idKhachHang, LoaiVeMayBayDTO idLoaiVeMayBay, byte tinhTrang) {
+    public VeMayBayDTO(int id, HoaDonVeBanDTO idHoaDonVeBan, KhachHangDTO idKhachHang, LoaiVeMayBayDTO idLoaiVeMayBay, LoaiVeMayBayDTO idLoaiVeMayVe, boolean tinhTrang) {
         this.id = id;
         this.idHoaDonVeBan = idHoaDonVeBan;
         this.idKhachHang = idKhachHang;
         this.idLoaiVeMayBay = idLoaiVeMayBay;
+        this.idLoaiVeMayVe = idLoaiVeMayVe;
         this.tinhTrang = tinhTrang;
     }
 
@@ -50,11 +52,19 @@ public class VeMayBayDTO {
         this.idLoaiVeMayBay = idLoaiVeMayBay;
     }
 
-    public byte getTinhTrang() {
+    public LoaiVeMayBayDTO getIdLoaiVeMayVe() {
+        return idLoaiVeMayVe;
+    }
+
+    public void setIdLoaiVeMayVe(LoaiVeMayBayDTO idLoaiVeMayVe) {
+        this.idLoaiVeMayVe = idLoaiVeMayVe;
+    }
+
+    public boolean isTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(byte tinhTrang) {
+    public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 }

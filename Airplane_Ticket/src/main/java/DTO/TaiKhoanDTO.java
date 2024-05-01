@@ -6,13 +6,13 @@ public class TaiKhoanDTO {
     private String username;
     private String password;
     private LocalDateTime ngayCap;
-    private byte tinhTrang;
+    private boolean tinhTrang;
     private NhanVienDTO cmndNhanVien;
 
     public TaiKhoanDTO() {
     }
 
-    public TaiKhoanDTO(String username, String password, LocalDateTime ngayCap, byte tinhTrang, NhanVienDTO cmndNhanVien) {
+    public TaiKhoanDTO(String username, String password, LocalDateTime ngayCap, boolean tinhTrang, NhanVienDTO cmndNhanVien) {
         this.username = username;
         this.password = password;
         this.ngayCap = ngayCap;
@@ -44,11 +44,11 @@ public class TaiKhoanDTO {
         this.ngayCap = ngayCap;
     }
 
-    public byte getTinhTrang() {
+    public boolean isTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(byte tinhTrang) {
+    public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 

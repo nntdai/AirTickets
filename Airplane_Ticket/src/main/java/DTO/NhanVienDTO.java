@@ -8,13 +8,13 @@ public class NhanVienDTO {
     private String ho;
     private String ten;
     private LocalDateTime ngaySinh;
-    private byte GioiTinh;
-    private byte TinhTrang;
+    private boolean GioiTinh;
+    private boolean TinhTrang;
 
     public NhanVienDTO() {
     }
 
-    public NhanVienDTO(String cmnd, String soDienThoai, String ho, String ten, LocalDateTime ngaySinh, byte gioiTinh, byte tinhTrang) {
+    public NhanVienDTO(String cmnd, String soDienThoai, String ho, String ten, LocalDateTime ngaySinh, boolean gioiTinh, boolean tinhTrang) {
         this.cmnd = cmnd;
         this.soDienThoai = soDienThoai;
         this.ho = ho;
@@ -64,19 +64,19 @@ public class NhanVienDTO {
         this.ngaySinh = ngaySinh;
     }
 
-    public byte getGioiTinh() {
+    public boolean isGioiTinh() {
         return GioiTinh;
     }
 
-    public void setGioiTinh(byte gioiTinh) {
+    public void setGioiTinh(boolean gioiTinh) {
         GioiTinh = gioiTinh;
     }
 
-    public byte getTinhTrang() {
+    public boolean isTinhTrang() {
         return TinhTrang;
     }
 
-    public void setTinhTrang(byte tinhTrang) {
+    public void setTinhTrang(boolean tinhTrang) {
         TinhTrang = tinhTrang;
     }
 }

@@ -5,12 +5,12 @@ public class MayBayDTO {
     private String ten;
     private int soGheH1;
     private int soGheH2;
-    private byte status;
+    private boolean status;
 
     public MayBayDTO() {
     }
 
-    public MayBayDTO(int id, String ten, int soGheH1, int soGheH2, byte status) {
+    public MayBayDTO(int id, String ten, int soGheH1, int soGheH2, boolean status) {
         this.id = id;
         this.ten = ten;
         this.soGheH1 = soGheH1;
@@ -50,11 +50,11 @@ public class MayBayDTO {
         this.soGheH2 = soGheH2;
     }
 
-    public byte getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }

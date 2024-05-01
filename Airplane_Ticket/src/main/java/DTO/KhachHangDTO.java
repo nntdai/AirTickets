@@ -10,12 +10,12 @@ public class KhachHangDTO {
     private LocalDateTime ngaySinh;
     private int diemTichLuy;
     private HangThanThietDTO idHangThanThiet;
-    private byte tinhTrang;
+    private boolean tinhTrang;
 
     public KhachHangDTO() {
     }
 
-    public KhachHangDTO(String cmnd, String hoTen, String soDienThoai, String diaChi, LocalDateTime ngaySinh, int diemTichLuy, HangThanThietDTO idHangThanThiet, byte tinhTrang) {
+    public KhachHangDTO(String cmnd, String hoTen, String soDienThoai, String diaChi, LocalDateTime ngaySinh, int diemTichLuy, HangThanThietDTO idHangThanThiet, boolean tinhTrang) {
         this.cmnd = cmnd;
         this.hoTen = hoTen;
         this.soDienThoai = soDienThoai;
@@ -82,11 +82,11 @@ public class KhachHangDTO {
         this.idHangThanThiet = idHangThanThiet;
     }
 
-    public byte getTinhTrang() {
+    public boolean isTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(byte tinhTrang) {
+    public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 }

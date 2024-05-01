@@ -9,12 +9,12 @@ public class HoaDonVeBanDTO {
     private KhachHangDTO idKhachHangLapHoaDon;
     private LocalDateTime ngayLapHoaDon;
     private BigDecimal tongTien;
-    private byte tinhTrang;
+    private boolean tinhTrang;
 
     public HoaDonVeBanDTO() {
     }
 
-    public HoaDonVeBanDTO(int id, NhanVienDTO idNhanVien, KhachHangDTO idKhachHangLapHoaDon, LocalDateTime ngayLapHoaDon, BigDecimal tongTien, byte tinhTrang) {
+    public HoaDonVeBanDTO(int id, NhanVienDTO idNhanVien, KhachHangDTO idKhachHangLapHoaDon, LocalDateTime ngayLapHoaDon, BigDecimal tongTien, boolean tinhTrang) {
         this.id = id;
         this.idNhanVien = idNhanVien;
         this.idKhachHangLapHoaDon = idKhachHangLapHoaDon;
@@ -63,11 +63,11 @@ public class HoaDonVeBanDTO {
         this.tongTien = tongTien;
     }
 
-    public byte getTinhTrang() {
+    public boolean isTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(byte tinhTrang) {
+    public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 }

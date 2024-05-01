@@ -12,12 +12,12 @@ public class ChuyenBayDTO {
     private LocalDateTime ngayDen;
     private LocalTime thoiGianBay;
     private String ghiChu;
-    private byte tinhTrang;
+    private boolean tinhTrang;
 
     public ChuyenBayDTO() {
     }
 
-    public ChuyenBayDTO(int id, MayBayDTO idMayBay, SanBayDTO maSanBayDi, SanBayDTO maSanBayDen, LocalDateTime ngayDi, LocalDateTime ngayDen, LocalTime thoiGianBay, String ghiChu, byte tinhTrang) {
+    public ChuyenBayDTO(int id, MayBayDTO idMayBay, SanBayDTO maSanBayDi, SanBayDTO maSanBayDen, LocalDateTime ngayDi, LocalDateTime ngayDen, LocalTime thoiGianBay, String ghiChu, boolean tinhTrang) {
         this.id = id;
         this.idMayBay = idMayBay;
         this.maSanBayDi = maSanBayDi;
@@ -93,11 +93,11 @@ public class ChuyenBayDTO {
         this.ghiChu = ghiChu;
     }
 
-    public byte getTinhTrang() {
+    public boolean isTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(byte tinhTrang) {
+    public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 }
