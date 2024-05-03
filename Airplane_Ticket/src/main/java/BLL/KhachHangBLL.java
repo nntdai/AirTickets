@@ -18,6 +18,18 @@ public class KhachHangBLL {
             khachHangSearchDTO.setNgaySinhDen("");
         }
 
+        if (khachHangSearchDTO.getDiemTichLuy() == null) {
+            khachHangSearchDTO.setDiemTichLuy("");
+        }
+
+        if (khachHangSearchDTO.getIdHangThanThiet() == null) {
+            khachHangSearchDTO.setIdHangThanThiet("");
+        }
+
+        if (khachHangSearchDTO.getTinhTrang() == null) {
+            khachHangSearchDTO.setTinhTrang("");
+        }
+
         return khachHangDAO.search(khachHangSearchDTO);
     }
 }
