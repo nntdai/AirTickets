@@ -30,6 +30,10 @@ public class KhachHangBLL {
             khachHangSearchDTO.setTinhTrang("");
         }
 
+        if (khachHangSearchDTO.getGioiTinh() == null) {
+            khachHangSearchDTO.setGioiTinh("");
+        }
+
         return khachHangDAO.search(khachHangSearchDTO);
     }
 }

@@ -63,9 +63,14 @@ public class KhachHangDAO {
                 stringBuilder.append("AND k.idHangThanThiet = ? ");
             }
 
-//             Tìm kiếm theo tình trạng
+            // Tìm kiếm theo tình trạng
             if (!khachHangSearchDTO.getTinhTrang().isEmpty()) {
                 stringBuilder.append("AND k.tinhTrang = ? ");
+            }
+
+            // Tìm kiếm theo giới tính
+            if (!khachHangSearchDTO.getGioiTinh().isEmpty()) {
+                stringBuilder.append("AND k.gioiTinh = ? ");
             }
 
             PreparedStatement preparedStatement = BaseDAO.getConnection()
@@ -93,7 +98,11 @@ public class KhachHangDAO {
             }
 
             if (!khachHangSearchDTO.getTinhTrang().isEmpty()) {
-                preparedStatement.setBoolean(preparedStatementIndex, Boolean.parseBoolean(khachHangSearchDTO.getTinhTrang()));
+                preparedStatement.setBoolean(preparedStatementIndex++, Boolean.parseBoolean(khachHangSearchDTO.getTinhTrang()));
+            }
+
+            if (!khachHangSearchDTO.getGioiTinh().isEmpty()) {
+                preparedStatement.setBoolean(preparedStatementIndex, Boolean.parseBoolean(khachHangSearchDTO.getGioiTinh()));
             }
 
             ResultSet resultSet = preparedStatement.executeQuery();
