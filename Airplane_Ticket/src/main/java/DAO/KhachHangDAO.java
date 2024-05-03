@@ -19,7 +19,7 @@ public class KhachHangDAO {
         try {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("SELECT k.cmnd, k.hoTen, k.soDienThoai, k.diaChi, " +
-                    "k.ngaySinh, k.diemTichLuy, k.idHangThanThiet, k.tinhTrang, " +
+                    "k.ngaySinh, k.diemTichLuy, k.idHangThanThiet, k.tinhTrang, k.gioiTinh, " +
                     "h.id, h.tenHang, h.diemTichLuy, h.khuyenMai\n" +
                     "FROM khachhang k LEFT JOIN hangthanthiet h \n" +
                     "ON k.idHangThanThiet = h.id ");
@@ -89,7 +89,7 @@ public class KhachHangDAO {
             }
 
             if (!khachHangSearchDTO.getIdHangThanThiet().isEmpty()) {
-                preparedStatement.setInt(preparedStatementIndex, Integer.parseInt(khachHangSearchDTO.getIdHangThanThiet()));
+                preparedStatement.setInt(preparedStatementIndex++, Integer.parseInt(khachHangSearchDTO.getIdHangThanThiet()));
             }
 
             if (!khachHangSearchDTO.getTinhTrang().isEmpty()) {
@@ -117,6 +117,7 @@ public class KhachHangDAO {
 
                 khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
+                khachHangDTO.setGioiTinh(resultSet.getBoolean("gioiTinh"));
                 khachHangDTOList.add(khachHangDTO);
             }
             BaseDAO.closeConnection();
@@ -124,5 +125,79 @@ public class KhachHangDAO {
             e.printStackTrace();
         }
         return khachHangDTOList;
+    }
+
+    public KhachHangDTO findByCMND(String cmnd) {
+        try {
+            PreparedStatement preparedStatement = BaseDAO.getConnection()
+                    .prepareStatement("SELECT\n" +
+                            "    k.cmnd,\n" +
+                            "    k.hoTen,\n" +
+                            "    k.soDienThoai,\n" +
+                            "    k.diaChi,\n" +
+                            "    k.ngaySinh,\n" +
+                            "    k.diemTichLuy,\n" +
+                            "    k.idHangThanThiet,\n" +
+                            "    k.tinhTrang,\n" +
+                            "    h.id AS hang_id,\n" +
+                            "    h.tenHang,\n" +
+                            "    h.diemTichLuy AS hang_diemTichLuy,\n" +
+                            "    h.khuyenMai\n" +
+                            "FROM\n" +
+                            "    khachhang k\n" +
+                            "LEFT JOIN\n" +
+                            "    hangthanthiet h ON k.idHangThanThiet = h.id;\n" +
+                            "WHERE k.cmnd = ? ");
+
+            preparedStatement.setString(1, cmnd);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                KhachHangDTO khachHangDTO = new KhachHangDTO();
+                khachHangDTO.setCmnd(resultSet.getString("cmnd"));
+                khachHangDTO.setHoTen(resultSet.getString("hoTen"));
+                khachHangDTO.setSoDienThoai(resultSet.getString("soDienThoai"));
+                khachHangDTO.setDiaChi(resultSet.getString("diaChi"));
+                khachHangDTO.setNgaySinh(LocalDate.parse(resultSet.getString("ngaySinh")));
+                khachHangDTO.setDiemTichLuy(resultSet.getInt("diemTichLuy"));
+
+                HangThanThietDTO hangThanThietDTO = new HangThanThietDTO();
+                hangThanThietDTO.setId(resultSet.getInt("id"));
+                hangThanThietDTO.setTenHang(resultSet.getString("tenHang"));
+                hangThanThietDTO.setDiemTichLuy(resultSet.getInt("diemTichLuy"));
+                hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
+                khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
+                khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
+                BaseDAO.closeConnection();
+                return khachHangDTO;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean create(KhachHangDTO khachHangDTO) {
+        try {
+            PreparedStatement preparedStatement = BaseDAO.getConnection()
+                    .prepareStatement("INSERT INTO khachhang (cmnd, hoTen, soDienThoai, " +
+                            "diaChi, ngaySinh, diemTichLuy, idHangThanThiet, tinhTrang)\n" +
+                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?) ");
+
+            preparedStatement.setString(1, khachHangDTO.getCmnd());
+            preparedStatement.setString(2, khachHangDTO.getHoTen());
+            preparedStatement.setString(3, khachHangDTO.getSoDienThoai());
+            preparedStatement.setString(4, khachHangDTO.getDiaChi());
+            preparedStatement.setInt(5, khachHangDTO.getDiemTichLuy());
+            preparedStatement.setInt(6, khachHangDTO.getIdHangThanThiet().getId());
+            preparedStatement.setBoolean(7, khachHangDTO.isTinhTrang());
+
+            boolean success = preparedStatement.executeUpdate() > 0;
+            BaseDAO.closeConnection(); // Di chuyển xuống dưới đây
+
+            return success;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

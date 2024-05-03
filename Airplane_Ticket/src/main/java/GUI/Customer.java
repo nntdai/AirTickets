@@ -78,7 +78,8 @@ public class Customer extends javax.swing.JPanel {
         for (KhachHangDTO khachHangDTO : khachHangBLL.search(khachHangSearchDTO)) {
             tblModel.addRow(new Object[]{khachHangDTO.getCmnd(), khachHangDTO.getHoTen(),
                     DateUtil.formatDate(String.valueOf(khachHangDTO.getNgaySinh())),
-                    khachHangDTO.getSoDienThoai(), khachHangDTO.getDiaChi(),
+                    khachHangDTO.isGioiTinh() ? "Nam" : "Nữ",
+                    khachHangDTO.getSoDienThoai(), khachHangDTO.getDiaChi(), khachHangDTO.getDiemTichLuy(),
                     khachHangDTO.getIdHangThanThiet().getTenHang(),
                     khachHangDTO.isTinhTrang() ? "Khả dụng" : "Không khả dụng"});
         }
@@ -86,8 +87,9 @@ public class Customer extends javax.swing.JPanel {
     }
 
     private void initTable() {
-        String[] colums = new String[]{"CMND", "Họ và tên", "Ngày sinh", "Số điện thoại",
-                "Địa chỉ", "Hãng thân thiết", "Tình trạng"};
+        String[] colums = new String[]{"CMND", "Họ và tên", "Ngày sinh", "Giới tính",
+                "Số điện thoại", "Địa chỉ", "Điểm tích lũy",
+                "Tên hạng", "Tình trạng"};
         tblModel.setColumnIdentifiers(colums);
         tabaleCustomer.setModel(tblModel);
     }
@@ -429,6 +431,9 @@ public class Customer extends javax.swing.JPanel {
         toBirthDate.setDate(null);
         phoneNumber.setText("");
         address.setText("");
+        diemTichLuy.setSelectedIndex(0);
+        hangThanThiet.setSelectedIndex(0);
+        status.setSelectedIndex(0);
     }
 
     private void tabaleCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabaleCustomerMouseClicked

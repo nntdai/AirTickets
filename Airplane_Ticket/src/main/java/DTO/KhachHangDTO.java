@@ -12,11 +12,10 @@ public class KhachHangDTO {
     private int diemTichLuy;
     private HangThanThietDTO idHangThanThiet;
     private boolean tinhTrang;
+    private boolean gioiTinh;
 
     public KhachHangDTO() {
     }
-
-
 
     public String getCmnd() {
         return cmnd;
@@ -80,5 +79,13 @@ public class KhachHangDTO {
 
     public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
+    }
+
+    public boolean isGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(boolean gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 }

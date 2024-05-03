@@ -12,6 +12,8 @@ public class KhachHangSearchDTO {
     private String idHangThanThiet;
     private String tinhTrang;
 
+    private String gioiTinh;
+
     public String getHoTen() {
         return hoTen;
     }
@@ -74,5 +76,13 @@ public class KhachHangSearchDTO {
 
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 }
