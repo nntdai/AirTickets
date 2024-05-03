@@ -8,13 +8,12 @@ package com.mycompany.airlineticket;
 import GUI.HomePage;
 
 /**
- *
  * @author User
  */
 public class AirlineTicket {
 
     public static void main(String[] args) {
-        HomePage hp=new HomePage();
+        HomePage hp = new HomePage();
         hp.setLocationRelativeTo(null);
         hp.setVisible(true);
     }
