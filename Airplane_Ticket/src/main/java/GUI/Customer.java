@@ -26,7 +26,8 @@ public class Customer extends javax.swing.JPanel {
     private HangThanThietBLL hangThanThietBLL = new HangThanThietBLL();
     private DefaultTableModel tblModel = new DefaultTableModel();
     private Map<String, String> cbxDiemTichLuyMap = new HashMap<>();
-    private Map<String, Integer> cbxhangThanThietMap = new HashMap<>();
+    private Map<String, String> cbxHangThanThietMap = new HashMap<>();
+    private Map<String, String> cbxTinhTrangMap = new HashMap<>();
 
     public Customer() {
         initComponents();
@@ -34,21 +35,34 @@ public class Customer extends javax.swing.JPanel {
         fillTable();
         initCbxDiemTichLuy();
         initCbxHangThanThiet();
+        initCbxTinhTrang();
+    }
+
+    private void initCbxTinhTrang() {
+        String[] descriptions = {"Tất cả", "Khả dụng", "Không khả dụng"};
+        String[] values = {"", "true", "false"};
+        DefaultComboBoxModel<String> cbxModel = new DefaultComboBoxModel<>(descriptions);
+        for (int i = 0; i < descriptions.length; i++) {
+            cbxTinhTrangMap.put(descriptions[i], values[i]);
+        }
+        status.setModel(cbxModel);
     }
 
     private void initCbxHangThanThiet() {
         DefaultComboBoxModel<String> cbxModel = new DefaultComboBoxModel<>();
+        cbxModel.addElement("Tất cả");
+        cbxHangThanThietMap.put("Tất cả", "");
         for (HangThanThietDTO hangThanThietDTO : hangThanThietBLL.findAll()) {
             cbxModel.addElement(hangThanThietDTO.getTenHang());
-            cbxhangThanThietMap.put(hangThanThietDTO.getTenHang(), hangThanThietDTO.getId());
+            cbxHangThanThietMap.put(hangThanThietDTO.getTenHang(), String.valueOf(hangThanThietDTO.getId()));
         }
         hangThanThiet.setModel(cbxModel);
     }
 
     private void initCbxDiemTichLuy() {
-        String[] descriptions = {"Dưới 100 điểm", "Từ 100 đến 200 điểm", "Từ 200 đến 300 điểm"
+        String[] descriptions = {"Tất cả", "Dưới 100 điểm", "Từ 100 đến 200 điểm", "Từ 200 đến 300 điểm"
                 , "Từ 300 đến 500 điểm", "Trên 500 điểm"};
-        String[] values = {"lt100", "100-200", "200-300", "300-500", "gt500"};
+        String[] values = {"", "lt100", "100-200", "200-300", "300-500", "gt500"};
         DefaultComboBoxModel<String> cbxModel = new DefaultComboBoxModel<>(descriptions);
         for (int i = 0; i < descriptions.length; i++) {
             cbxDiemTichLuyMap.put(descriptions[i], values[i]);
@@ -65,7 +79,8 @@ public class Customer extends javax.swing.JPanel {
             tblModel.addRow(new Object[]{khachHangDTO.getCmnd(), khachHangDTO.getHoTen(),
                     DateUtil.formatDate(String.valueOf(khachHangDTO.getNgaySinh())),
                     khachHangDTO.getSoDienThoai(), khachHangDTO.getDiaChi(),
-                    khachHangDTO.getIdHangThanThiet().getTenHang(), khachHangDTO.isTinhTrang()});
+                    khachHangDTO.getIdHangThanThiet().getTenHang(),
+                    khachHangDTO.isTinhTrang() ? "Khả dụng" : "Không khả dụng"});
         }
         tblModel.fireTableDataChanged();
     }
@@ -84,9 +99,9 @@ public class Customer extends javax.swing.JPanel {
         khachHangSearchDTO.setNgaySinhDen(DateJcalendarUtil.formatDate(toBirthDate.getDate()));
         khachHangSearchDTO.setSoDienThoai(phoneNumber.getText());
         khachHangSearchDTO.setDiaChi(address.getText());
-        khachHangSearchDTO.setDiemTichLuy(diemTichLuy.getSelectedItem().toString());
-        khachHangSearchDTO.setIdHangThanThiet(hangThanThiet.getSelectedItem().toString());
-        khachHangSearchDTO.setTinhTrang(status.getSelectedItem().toString());
+        khachHangSearchDTO.setDiemTichLuy(cbxDiemTichLuyMap.get(diemTichLuy.getSelectedItem()));
+        khachHangSearchDTO.setIdHangThanThiet(cbxHangThanThietMap.get(hangThanThiet.getSelectedItem()));
+        khachHangSearchDTO.setTinhTrang(cbxTinhTrangMap.get(status.getSelectedItem()));
         return khachHangSearchDTO;
     }
 
