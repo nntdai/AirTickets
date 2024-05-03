@@ -139,26 +139,49 @@ public class KhachHangDAO {
     public KhachHangDTO findByCMND(String cmnd) {
         try {
             PreparedStatement preparedStatement = BaseDAO.getConnection()
-                    .prepareStatement("SELECT\n" +
-                            "    k.cmnd,\n" +
-                            "    k.hoTen,\n" +
-                            "    k.soDienThoai,\n" +
-                            "    k.diaChi,\n" +
-                            "    k.ngaySinh,\n" +
-                            "    k.diemTichLuy,\n" +
-                            "    k.idHangThanThiet,\n" +
-                            "    k.tinhTrang,\n" +
-                            "    h.id AS hang_id,\n" +
-                            "    h.tenHang,\n" +
-                            "    h.diemTichLuy AS hang_diemTichLuy,\n" +
-                            "    h.khuyenMai\n" +
-                            "FROM\n" +
-                            "    khachhang k\n" +
-                            "LEFT JOIN\n" +
-                            "    hangthanthiet h ON k.idHangThanThiet = h.id;\n" +
-                            "WHERE k.cmnd = ? ");
+                    .prepareStatement("SELECT k.cmnd, k.hoTen, k.soDienThoai, k.diaChi, " +
+                            "k.ngaySinh, k.diemTichLuy, k.idHangThanThiet, k.tinhTrang, k.gioiTinh, " +
+                            "h.id, h.tenHang, h.diemTichLuy, h.khuyenMai\n" +
+                            "FROM khachhang k LEFT JOIN hangthanthiet h \n" +
+                            "ON k.idHangThanThiet = h.id WHERE k.cmnd = ? ");
 
             preparedStatement.setString(1, cmnd);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                KhachHangDTO khachHangDTO = new KhachHangDTO();
+                khachHangDTO.setCmnd(resultSet.getString("cmnd"));
+                khachHangDTO.setHoTen(resultSet.getString("hoTen"));
+                khachHangDTO.setSoDienThoai(resultSet.getString("soDienThoai"));
+                khachHangDTO.setDiaChi(resultSet.getString("diaChi"));
+                khachHangDTO.setNgaySinh(LocalDate.parse(resultSet.getString("ngaySinh")));
+                khachHangDTO.setDiemTichLuy(resultSet.getInt("diemTichLuy"));
+
+                HangThanThietDTO hangThanThietDTO = new HangThanThietDTO();
+                hangThanThietDTO.setId(resultSet.getInt("id"));
+                hangThanThietDTO.setTenHang(resultSet.getString("tenHang"));
+                hangThanThietDTO.setDiemTichLuy(resultSet.getInt("diemTichLuy"));
+                hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
+                khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
+                khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
+                BaseDAO.closeConnection();
+                return khachHangDTO;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public KhachHangDTO findByPhoneNumber(String phoneNumber) {
+        try {
+            PreparedStatement preparedStatement = BaseDAO.getConnection()
+                    .prepareStatement("SELECT k.cmnd, k.hoTen, k.soDienThoai, k.diaChi, " +
+                            "k.ngaySinh, k.diemTichLuy, k.idHangThanThiet, k.tinhTrang, k.gioiTinh, " +
+                            "h.id, h.tenHang, h.diemTichLuy, h.khuyenMai\n" +
+                            "FROM khachhang k LEFT JOIN hangthanthiet h \n" +
+                            "ON k.idHangThanThiet = h.id WHERE k.soDienThoai = ? ");
+
+            preparedStatement.setString(1, phoneNumber);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 KhachHangDTO khachHangDTO = new KhachHangDTO();
@@ -188,21 +211,40 @@ public class KhachHangDAO {
     public boolean create(KhachHangDTO khachHangDTO) {
         try {
             PreparedStatement preparedStatement = BaseDAO.getConnection()
-                    .prepareStatement("INSERT INTO khachhang (cmnd, hoTen, soDienThoai, " +
-                            "diaChi, ngaySinh, diemTichLuy, idHangThanThiet, tinhTrang)\n" +
-                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?) ");
+                    .prepareStatement("INSERT INTO khachhang (cmnd, hoTen, soDienThoai, diaChi, ngaySinh, gioiTinh)\n" +
+                            "VALUES (?, ?, ?, ?, ?, ?) ");
 
             preparedStatement.setString(1, khachHangDTO.getCmnd());
             preparedStatement.setString(2, khachHangDTO.getHoTen());
             preparedStatement.setString(3, khachHangDTO.getSoDienThoai());
             preparedStatement.setString(4, khachHangDTO.getDiaChi());
-            preparedStatement.setInt(5, khachHangDTO.getDiemTichLuy());
-            preparedStatement.setInt(6, khachHangDTO.getIdHangThanThiet().getId());
-            preparedStatement.setBoolean(7, khachHangDTO.isTinhTrang());
+            preparedStatement.setString(5, String.valueOf(khachHangDTO.getNgaySinh()));
+            preparedStatement.setBoolean(6, khachHangDTO.isGioiTinh());
 
             boolean success = preparedStatement.executeUpdate() > 0;
-            BaseDAO.closeConnection(); // Di chuyển xuống dưới đây
+            BaseDAO.closeConnection();
+            return success;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+    public boolean delete(KhachHangDTO khachHangDTO) {
+        try {
+            PreparedStatement preparedStatement = BaseDAO.getConnection()
+                    .prepareStatement("DELETE FROM khachhang\n" +
+                            "WHERE cmnd = ?\n" +
+                            "AND NOT EXISTS (\n" +
+                            "    SELECT 1 FROM hoadonveban\n" +
+                            "    WHERE idKhachHangLapHoaDon = ?\n" +
+                            ") ");
+
+            preparedStatement.setString(1, khachHangDTO.getCmnd());
+            preparedStatement.setString(2, khachHangDTO.getCmnd());
+
+            boolean success = preparedStatement.executeUpdate() > 0;
+            BaseDAO.closeConnection();
             return success;
         } catch (SQLException e) {
             e.printStackTrace();
