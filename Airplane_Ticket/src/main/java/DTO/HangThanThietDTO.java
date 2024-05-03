@@ -9,6 +9,11 @@ public class HangThanThietDTO {
     public HangThanThietDTO() {
     }
 
+    public HangThanThietDTO(int id, String tenHang) {
+        this.id = id;
+        this.tenHang = tenHang;
+    }
+
     public HangThanThietDTO(int id, String tenHang, int diemTichLuy, int khuyenMai) {
         this.id = id;
         this.tenHang = tenHang;

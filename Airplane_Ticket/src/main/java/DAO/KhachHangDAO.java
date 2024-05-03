@@ -7,6 +7,7 @@ import DTO.KhachHangSearchDTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,14 +59,14 @@ public class KhachHangDAO {
             }
 
             // Tìm kiếm theo hãng thân thiết
-            if (!khachHangSearchDTO.getIdHangThanThiet().isEmpty()) {
-                stringBuilder.append("AND k.idHangThanThiet = ? ");
-            }
+//            if (!khachHangSearchDTO.getIdHangThanThiet().isEmpty()) {
+//                stringBuilder.append("AND k.idHangThanThiet = ? ");
+//            }
 
             // Tìm kiếm theo tình trạng
-            if (!khachHangSearchDTO.getTinhTrang().isEmpty()) {
-                stringBuilder.append("AND k.tinhTrang = ? ");
-            }
+//            if (!khachHangSearchDTO.getTinhTrang().isEmpty()) {
+//                stringBuilder.append("AND k.tinhTrang = ? ");
+//            }
 
             PreparedStatement preparedStatement = BaseDAO.getConnection()
                     .prepareStatement(stringBuilder.toString());
@@ -82,18 +83,18 @@ public class KhachHangDAO {
                 } else if (khachHangSearchDTO.getNgaySinhDen().isEmpty()) {
                     preparedStatement.setString(preparedStatementIndex++, khachHangSearchDTO.getNgaySinhTu());
                 } else {
-                    preparedStatement.setString(preparedStatementIndex++, khachHangSearchDTO.getNgaySinhDen());
                     preparedStatement.setString(preparedStatementIndex++, khachHangSearchDTO.getNgaySinhTu());
+                    preparedStatement.setString(preparedStatementIndex, khachHangSearchDTO.getNgaySinhDen());
                 }
             }
 
-            if (!khachHangSearchDTO.getIdHangThanThiet().isEmpty()) {
-                preparedStatement.setInt(preparedStatementIndex++, Integer.parseInt(khachHangSearchDTO.getIdHangThanThiet()));
-            }
+//            if (!khachHangSearchDTO.getIdHangThanThiet().isEmpty()) {
+//                preparedStatement.setInt(preparedStatementIndex++, Integer.parseInt(khachHangSearchDTO.getIdHangThanThiet()));
+//            }
 
-            if (!khachHangSearchDTO.getTinhTrang().isEmpty()) {
-                preparedStatement.setBoolean(preparedStatementIndex, Boolean.parseBoolean(khachHangSearchDTO.getTinhTrang()));
-            }
+//            if (!khachHangSearchDTO.getTinhTrang().isEmpty()) {
+//                preparedStatement.setBoolean(preparedStatementIndex, Boolean.parseBoolean(khachHangSearchDTO.getTinhTrang()));
+//            }
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -105,7 +106,7 @@ public class KhachHangDAO {
                 khachHangDTO.setHoTen(resultSet.getString("hoTen"));
                 khachHangDTO.setSoDienThoai(resultSet.getString("soDienThoai"));
                 khachHangDTO.setDiaChi(resultSet.getString("diaChi"));
-                khachHangDTO.setNgaySinh(LocalDateTime.parse(resultSet.getString("ngaySinh")));
+                khachHangDTO.setNgaySinh(LocalDate.parse(resultSet.getString("ngaySinh")));
                 khachHangDTO.setDiemTichLuy(resultSet.getInt("diemTichLuy"));
 
                 hangThanThietDTO = new HangThanThietDTO();
@@ -118,7 +119,6 @@ public class KhachHangDAO {
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
                 khachHangDTOList.add(khachHangDTO);
             }
-
             BaseDAO.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();

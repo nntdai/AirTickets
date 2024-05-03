@@ -26,4 +26,23 @@ public class BaseDAO {
         connection.close();
         connection = null;
     }
+
+//    public static void main(String[] args) throws SQLException {
+//        List<SanBayDTO> sanBayDTOList = new ArrayList<>();
+//        PreparedStatement preparedStatement = BaseDAO.getConnection()
+//                .prepareStatement("SELECT * FROM `sanbay`");
+//        ResultSet resultSet = preparedStatement.executeQuery();
+//        SanBayDTO sanBayDTO;
+//        while (resultSet.next()) {
+//            sanBayDTO = new SanBayDTO();
+//            sanBayDTO.setMaSanBay(resultSet.getString("maSanBay"));
+//            sanBayDTO.setTen(resultSet.getString("ten"));
+//            sanBayDTO.setStatus(resultSet.getBoolean("status"));
+//            sanBayDTOList.add(sanBayDTO);
+//        }
+//
+//        for (SanBayDTO sanBayDTO1 : sanBayDTOList) {
+//            System.out.println(sanBayDTO1);
+//        }
+//    }
 }
