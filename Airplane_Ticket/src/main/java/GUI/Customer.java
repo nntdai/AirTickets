@@ -544,7 +544,21 @@ public class Customer extends javax.swing.JPanel {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
-        new Customer_Update();
+        refreshInputSearch();
+        if (!checkSelectedRow) {
+            JOptionPane.showMessageDialog(null, "Vui lòng click vào dòng khách hàng muốn chỉnh sửa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        String cmndCustomer = cmnd.getText();
+        KhachHangDTO khachHangDTO = khachHangBLL.findByCMND(cmndCustomer);
+        if (khachHangDTO == null) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng trong hệ thống", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            fillTable();
+            checkSelectedRow = false;
+            return;
+        }
+        checkSelectedRow = false;
+        new Customer_Update(this);
     }
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
@@ -600,5 +614,9 @@ public class Customer extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTable tableCustomer;
     private com.toedter.calendar.JDateChooser toBirthDate;
-    // End of variables declaration//GEN-END:variables
+
+    public JTextField getCmnd() {
+        return cmnd;
+    }
+// End of variables declaration//GEN-END:variables
 }

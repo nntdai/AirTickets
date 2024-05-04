@@ -4,25 +4,80 @@
  */
 package GUI;
 
+import BLL.HangThanThietBLL;
+import BLL.KhachHangBLL;
+import DTO.HangThanThietDTO;
+import DTO.KhachHangDTO;
+import Util.DateJcalendarUtil;
+import Util.ParseLocalDateToDateUtil;
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- *
  * @author ASUS
  */
 public class Customer_Update extends javax.swing.JFrame {
+    private KhachHangBLL khachHangBLL = new KhachHangBLL();
+    private HangThanThietBLL hangThanThietBLL = new HangThanThietBLL();
+    private Customer customer;
+    private Map<String, String> cbxHangThanThietMap = new HashMap<>();
+    private Map<String, String> cbxTinhTrangMap = new HashMap<>();
 
-    /**
-     * Creates new form Customer_Update
-     */
-    public Customer_Update() {
+    public Customer_Update(Customer customer) {
         initComponents();
         this.setTitle("Chỉnh sửa khách hàng");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
+        this.customer = customer;
+        initCbxHangThanThiet();
+        initCbxTinhTrang();
+        initCustomerEdit();
     }
+
+    private void initCustomerEdit() {
+        String cmndCustomer = customer.getCmnd().getText();
+        KhachHangDTO khachHangDTO = khachHangBLL.findByCMND(cmndCustomer);
+        name.setText(khachHangDTO.getHoTen());
+        birthDate.setDate(ParseLocalDateToDateUtil.convertToDate(khachHangDTO.getNgaySinh()));
+        if (khachHangDTO.isGioiTinh()) {
+            maleRadio.setSelected(true);
+        } else {
+            femaleRadio.setSelected(true);
+        }
+        phoneNumber.setText(khachHangDTO.getSoDienThoai());
+        diemTichLuy.setText(String.valueOf(khachHangDTO.getDiemTichLuy()));
+        hangThanThiet.setSelectedIndex(Integer.parseInt(cbxHangThanThietMap.get(khachHangDTO.getIdHangThanThiet().getTenHang())) - 1);
+        status.setSelectedIndex(Integer.parseInt(String.valueOf(cbxTinhTrangMap.get(String.valueOf(khachHangDTO.isTinhTrang())).equalsIgnoreCase("Khả dụng") ? '0' : '1')));
+        address.setText(khachHangDTO.getDiaChi());
+    }
+
+    private void initCbxHangThanThiet() {
+        DefaultComboBoxModel<String> cbxModel = new DefaultComboBoxModel<>();
+        for (HangThanThietDTO hangThanThietDTO : hangThanThietBLL.findAll()) {
+            cbxModel.addElement(hangThanThietDTO.getTenHang());
+            cbxHangThanThietMap.put(hangThanThietDTO.getTenHang(), String.valueOf(hangThanThietDTO.getId()));
+        }
+        hangThanThiet.setModel(cbxModel);
+    }
+
+    private void initCbxTinhTrang() {
+        String[] descriptions = {"Khả dụng", "Không khả dụng"};
+        String[] values = {"true", "false"};
+        DefaultComboBoxModel<String> cbxModel = new DefaultComboBoxModel<>(descriptions);
+        for (int i = 0; i < descriptions.length; i++) {
+            cbxTinhTrangMap.put(values[i], descriptions[i]);
+        }
+        status.setModel(cbxModel);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,13 +94,13 @@ public class Customer_Update extends javax.swing.JFrame {
         name = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         birthDate = new com.toedter.calendar.JDateChooser();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        femaleRadio = new javax.swing.JRadioButton();
+        maleRadio = new javax.swing.JRadioButton();
         phoneNumber = new javax.swing.JTextField();
         diemTichLuy = new javax.swing.JTextField();
-        HangThanThiet = new javax.swing.JComboBox<>();
+        hangThanThiet = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        status = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         address = new javax.swing.JTextArea();
         btnCancel = new javax.swing.JButton();
@@ -67,18 +122,18 @@ public class Customer_Update extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(183, 183, 183)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addContainerGap())
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -96,24 +151,31 @@ public class Customer_Update extends javax.swing.JFrame {
 
         birthDate.setDateFormatString("yyyy-MM-dd");
 
-        jRadioButton1.setText("Nữ");
+        femaleRadio.setText("Nữ");
 
-        jRadioButton2.setText("Nam");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        maleRadio.setText("Nam");
+        maleRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                maleRadioActionPerformed(evt);
             }
         });
 
-        HangThanThiet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        phoneNumber.setBorder(null);
+
+        diemTichLuy.setBorder(null);
+
+        hangThanThiet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        hangThanThiet.setBorder(null);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel8.setText("Địa chỉ:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        status.setBorder(null);
 
         address.setColumns(20);
         address.setRows(5);
+        address.setBorder(null);
         jScrollPane1.setViewportView(address);
 
         btnCancel.setBackground(new java.awt.Color(0, 153, 255));
@@ -132,6 +194,11 @@ public class Customer_Update extends javax.swing.JFrame {
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Chỉnh sửa");
         btnUpdate.setBorder(null);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel9.setText("Giới tính:");
@@ -148,86 +215,129 @@ public class Customer_Update extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel13.setText("Tên hạng:");
 
+        hangThanThiet.setEnabled(false); // Chỉ cho phép xem, không cho phép chọn
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(maleRadio);
+        group.add(femaleRadio);
+
+
+        diemTichLuy.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateComboBox();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateComboBox();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateComboBox();
+            }
+
+            private void updateComboBox() {
+                String inputText = diemTichLuy.getText();
+                if (!inputText.matches("^[0-9]+$") || inputText.equals("")) {
+                    diemTichLuy.setText("0");
+                }
+                int inputValue = Integer.parseInt(inputText);
+                if (inputValue >= 500) {
+                    hangThanThiet.setSelectedIndex(4);
+                } else if (inputValue >= 300) {
+                    hangThanThiet.setSelectedIndex(3);
+                } else if (inputValue >= 200) {
+                    hangThanThiet.setSelectedIndex(2);
+                } else if (inputValue >= 100) {
+                    hangThanThiet.setSelectedIndex(1);
+                } else {
+                    hangThanThiet.setSelectedIndex(0);
+                }
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(HangThanThiet, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(diemTichLuy, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(phoneNumber, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jRadioButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(birthDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(37, 37, 37)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                                                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(status, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(hangThanThiet, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(diemTichLuy, javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(phoneNumber, javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(femaleRadio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(maleRadio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(birthDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(phoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(diemTichLuy, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(HangThanThiet, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(birthDate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(maleRadio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(femaleRadio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(phoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(diemTichLuy, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(hangThanThiet, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,57 +347,95 @@ public class Customer_Update extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void maleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_maleRadioActionPerformed
+
+    private void close() {
+        dispose();
+    }
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        dispose();
+        close();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String cmndCustomer = customer.getCmnd().getText();
+        KhachHangDTO khachHangDTO = khachHangBLL.findByCMND(cmndCustomer);
+
+        if (khachHangDTO == null) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng trong hệ thống", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        StringBuilder errorMessages = new StringBuilder();
+        if (!khachHangDTO.getSoDienThoai().equals(phoneNumber.getText())) {
+            khachHangBLL.validatePhoneNumberExists(errorMessages, this);
+        }
+        khachHangBLL.validate(errorMessages, this);
+
+        if (!errorMessages.isEmpty()) {
+            JOptionPane.showMessageDialog(null, errorMessages, "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn chỉnh sửa khách hàng "
+                + khachHangDTO.getHoTen() + "\n          Có căn cước công dân " + khachHangDTO.getCmnd(), "Xác nhận chỉnh sửa khách hàng", JOptionPane.YES_NO_OPTION);
+
+        if (choice == JOptionPane.YES_NO_OPTION) {
+
+            khachHangDTO.setHoTen(name.getText());
+
+            khachHangDTO.setNgaySinh(LocalDate.parse(DateJcalendarUtil.formatDate(birthDate.getDate())));
+            if (maleRadio.isSelected()) {
+                khachHangDTO.setGioiTinh(true);
+            } else if (femaleRadio.isSelected()) {
+                khachHangDTO.setGioiTinh(false);
+            }
+
+            khachHangDTO.setSoDienThoai(phoneNumber.getText());
+
+            khachHangDTO.setDiemTichLuy(Integer.parseInt(diemTichLuy.getText()));
+            for (HangThanThietDTO hangThanThietDTO : hangThanThietBLL.findAll()) {
+                if (String.valueOf(hangThanThiet.getSelectedItem()).equalsIgnoreCase(hangThanThietDTO.getTenHang())) {
+                    khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
+                }
+            }
+
+            String targetValue = String.valueOf(status.getSelectedItem());
+            for (Map.Entry<String, String> entry : cbxTinhTrangMap.entrySet()) {
+                if (entry.getValue().equalsIgnoreCase(targetValue)) {
+                    khachHangDTO.setTinhTrang(Boolean.parseBoolean(entry.getKey()));
+                    break;
+                }
+            }
+
+            khachHangDTO.setDiaChi(address.getText());
+
+            if (khachHangBLL.update(khachHangDTO)) {
+                close();
+                customer.loadDataTable();
+                JOptionPane.showMessageDialog(null, "     Chỉnh sửa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bai", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+            customer.loadDataTable();
+        }
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Customer_Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Customer_Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Customer_Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Customer_Update.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Customer_Update().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> HangThanThiet;
     private javax.swing.JTextArea address;
     private com.toedter.calendar.JDateChooser birthDate;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField diemTichLuy;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JRadioButton femaleRadio;
+    private javax.swing.JComboBox<String> hangThanThiet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -298,10 +446,35 @@ public class Customer_Update extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton maleRadio;
     private javax.swing.JTextField name;
     private javax.swing.JTextField phoneNumber;
+    private javax.swing.JComboBox<String> status;
+
+    public JDateChooser getBirthDate() {
+        return birthDate;
+    }
+
+    public JTextField getDiemTichLuy() {
+        return diemTichLuy;
+    }
+
+    @Override
+    public String getName() {
+        return name.getText();
+    }
+
+    public JTextField getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public JTextArea getAddress() {
+        return address;
+    }
+
+    public JComboBox<String> getStatus() {
+        return status;
+    }
     // End of variables declaration//GEN-END:variables
 }

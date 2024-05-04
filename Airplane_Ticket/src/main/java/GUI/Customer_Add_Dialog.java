@@ -134,6 +134,7 @@ public class Customer_Add_Dialog extends java.awt.Dialog {
 
         birthDate.setDateFormatString("yyyy-MM-dd");
 
+        setTitle("Thêm mới khách hàng");
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
