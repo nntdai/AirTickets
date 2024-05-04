@@ -163,7 +163,7 @@ public class KhachHangDAO {
                 hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
                 khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
-                khachHangDTO.setTinhTrang(resultSet.getBoolean("gioiTinh"));
+                khachHangDTO.setGioiTinh(resultSet.getBoolean("gioiTinh"));
                 BaseDAO.closeConnection();
                 return khachHangDTO;
             }
@@ -200,7 +200,7 @@ public class KhachHangDAO {
                 hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
                 khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
-                khachHangDTO.setTinhTrang(resultSet.getBoolean("gioiTinh"));
+                khachHangDTO.setGioiTinh(resultSet.getBoolean("gioiTinh"));
                 BaseDAO.closeConnection();
                 return khachHangDTO;
             }
@@ -270,7 +270,7 @@ public class KhachHangDAO {
             preparedStatement.setInt(6, khachHangDTO.getIdHangThanThiet().getId());
             preparedStatement.setBoolean(7, khachHangDTO.isTinhTrang());
             preparedStatement.setBoolean(8, khachHangDTO.isGioiTinh());
-
+            preparedStatement.setString(9, khachHangDTO.getCmnd());
             boolean success = preparedStatement.executeUpdate() > 0;
             BaseDAO.closeConnection();
             return success;

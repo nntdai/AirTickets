@@ -4,6 +4,7 @@ import DAO.KhachHangDAO;
 import DTO.KhachHangDTO;
 import DTO.KhachHangSearchDTO;
 import GUI.Customer_Add_Dialog;
+import GUI.Customer_Update;
 import Util.DateJcalendarUtil;
 
 import java.time.LocalDate;
@@ -57,12 +58,12 @@ public class KhachHangBLL {
     }
 
     public void validate(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
-        String cmndStr = customer_add_dialog.getCmnd().getText();
-        String nameStr = customer_add_dialog.getTextFieldName();
+        String cmndStr = customer_add_dialog.getCmnd().getText().trim();
+        String nameStr = customer_add_dialog.getTextFieldName().trim();
         String birthDateStr = DateJcalendarUtil.formatDate(customer_add_dialog.getBirthDate().getDate());
         String genderStr = customer_add_dialog.getGender().getSelectedItem().toString();
-        String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText();
-        String addressStr = customer_add_dialog.getAddress().getText();
+        String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText().trim();
+        String addressStr = customer_add_dialog.getAddress().getText().trim();
 
         if (cmndStr.isEmpty()) {
             errorMessage.append("Căn cước công dân không được để trống\n");
@@ -108,7 +109,7 @@ public class KhachHangBLL {
     }
 
     public void validateCmndExists(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
-        String cmndStr = customer_add_dialog.getCmnd().getText();
+        String cmndStr = customer_add_dialog.getCmnd().getText().trim();
 
         if (khachHangDAO.findByCMND(cmndStr) != null) {
             errorMessage.append("Căn cước công dân đã tồn tại trong hệ thống\n");
@@ -116,7 +117,53 @@ public class KhachHangBLL {
     }
 
     public void validatePhoneNumberExists(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
-        String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText();
+        String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText().trim();
+
+        if (khachHangDAO.findByPhoneNumber(phoneNumberStr) != null) {
+            errorMessage.append("Số điện thoại đã tồn tại trong hệ thống\n");
+        }
+    }
+
+    //=================================
+    public void validate(StringBuilder errorMessage, Customer_Update customer_update) {
+        String nameStr = customer_update.getName().trim();
+        String birthDateStr = DateJcalendarUtil.formatDate(customer_update.getBirthDate().getDate());
+        String phoneNumberStr = customer_update.getPhoneNumber().getText().trim();
+        String addressStr = customer_update.getAddress().getText().trim();
+
+        if (nameStr.isEmpty()) {
+            errorMessage.append("Tên không được để trống\n");
+        } else if (!nameStr.matches("^[a-zA-ZÀ-Ỹà-ỹ\\s]+$")) {
+            errorMessage.append("Tên không được chứa kí tự đặc biệt và số\n");
+        }
+
+        if (birthDateStr == null) {
+            errorMessage.append("Bắt buộc phải chọn ngày sinh\n");
+        } else {
+            LocalDate birthDate = LocalDate.parse(birthDateStr);
+            int currentYear = LocalDate.now().getYear(); // lấy ra năm hiện tại
+            if (currentYear - birthDate.getYear() <= 14) {
+                errorMessage.append("Bắt buộc phải từ 14 tuổi\n");
+            }
+        }
+
+        if (phoneNumberStr.isEmpty()) {
+            errorMessage.append("Số điện thoại không được để trống\n");
+        } else if (!phoneNumberStr.matches("^0[0-9]+$")) {
+            errorMessage.append("Số điện thoại không hợp lệ, số hợp lệ là [0xxx] với xxx là 0-9\n");
+        } else if (phoneNumberStr.length() > 11) {
+            errorMessage.append("Số điện thoại tối đa 11 số\n");
+        } else if (phoneNumberStr.length() < 10){
+            errorMessage.append("Số điện thoại tối thiểu 10 số\n");
+        }
+
+        if (addressStr.isEmpty()) {
+            errorMessage.append("Địa chỉ không được để trống\n");
+        }
+    }
+
+    public void validatePhoneNumberExists(StringBuilder errorMessage, Customer_Update customer_update) {
+        String phoneNumberStr = customer_update.getPhoneNumber().getText().trim();
 
         if (khachHangDAO.findByPhoneNumber(phoneNumberStr) != null) {
             errorMessage.append("Số điện thoại đã tồn tại trong hệ thống\n");
