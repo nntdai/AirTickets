@@ -20,11 +20,13 @@ import java.util.Map;
 public class Customer_Add_Dialog extends java.awt.Dialog {
     private KhachHangBLL khachHangBLL = new KhachHangBLL();
     private Map<String, String> cbxGioiTinhMap = new HashMap<>();
+    private Customer customer;
 
-    public Customer_Add_Dialog(java.awt.Frame parent, boolean modal) {
+    public Customer_Add_Dialog(java.awt.Frame parent, boolean modal, Customer customer) {
         super(parent, modal);
         initComponents();
         initCbxGioiTinh();
+        this.customer = customer;
     }
 
     private void initCbxGioiTinh() {
@@ -256,28 +258,30 @@ public class Customer_Add_Dialog extends java.awt.Dialog {
         khachHangDTO.setDiaChi(address.getText());
         closeDialog();
         if (khachHangBLL.create(khachHangDTO)) {
-            JOptionPane.showMessageDialog(null, "Thêm mới thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            customer.loadDataTable();
+            JOptionPane.showMessageDialog(null, "      Thêm mới thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Thêm mới thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+        customer.loadDataTable();
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Customer_Add_Dialog dialog = new Customer_Add_Dialog(new java.awt.Frame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                Customer_Add_Dialog dialog = new Customer_Add_Dialog(new java.awt.Frame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
