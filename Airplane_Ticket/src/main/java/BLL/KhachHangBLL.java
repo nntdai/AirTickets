@@ -6,11 +6,8 @@ import DTO.KhachHangSearchDTO;
 import GUI.Customer_Add_Dialog;
 import Util.DateJcalendarUtil;
 
-import javax.swing.*;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public class KhachHangBLL {
     private KhachHangDAO khachHangDAO = new KhachHangDAO();
@@ -53,6 +50,10 @@ public class KhachHangBLL {
 
     public boolean create(KhachHangDTO khachHangDTO) {
         return khachHangDAO.create(khachHangDTO);
+    }
+
+    public boolean update(KhachHangDTO khachHangDTO) {
+        return khachHangDAO.update(khachHangDTO);
     }
 
     public void validate(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {

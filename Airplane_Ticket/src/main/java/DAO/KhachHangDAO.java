@@ -163,6 +163,7 @@ public class KhachHangDAO {
                 hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
                 khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
+                khachHangDTO.setTinhTrang(resultSet.getBoolean("gioiTinh"));
                 BaseDAO.closeConnection();
                 return khachHangDTO;
             }
@@ -199,6 +200,7 @@ public class KhachHangDAO {
                 hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
                 khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
+                khachHangDTO.setTinhTrang(resultSet.getBoolean("gioiTinh"));
                 BaseDAO.closeConnection();
                 return khachHangDTO;
             }
@@ -242,6 +244,32 @@ public class KhachHangDAO {
 
             preparedStatement.setString(1, khachHangDTO.getCmnd());
             preparedStatement.setString(2, khachHangDTO.getCmnd());
+
+            boolean success = preparedStatement.executeUpdate() > 0;
+            BaseDAO.closeConnection();
+            return success;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean update(KhachHangDTO khachHangDTO) {
+        try {
+            PreparedStatement preparedStatement = BaseDAO.getConnection()
+                    .prepareStatement("UPDATE khachhang SET hoTen = ?, " +
+                            "soDienThoai = ?, diaChi = ?, ngaySinh = ?, diemTichLuy = ?, " +
+                            "idHangThanThiet = ?, tinhTrang = ?, gioiTinh = ? " +
+                            "WHERE cmnd = ? ");
+
+            preparedStatement.setString(1, khachHangDTO.getHoTen());
+            preparedStatement.setString(2, khachHangDTO.getSoDienThoai());
+            preparedStatement.setString(3, khachHangDTO.getDiaChi());
+            preparedStatement.setString(4, String.valueOf(khachHangDTO.getNgaySinh()));
+            preparedStatement.setInt(5, khachHangDTO.getDiemTichLuy());
+            preparedStatement.setInt(6, khachHangDTO.getIdHangThanThiet().getId());
+            preparedStatement.setBoolean(7, khachHangDTO.isTinhTrang());
+            preparedStatement.setBoolean(8, khachHangDTO.isGioiTinh());
 
             boolean success = preparedStatement.executeUpdate() > 0;
             BaseDAO.closeConnection();

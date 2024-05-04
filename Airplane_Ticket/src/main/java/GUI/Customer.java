@@ -13,6 +13,8 @@ import Util.DateJcalendarUtil;
 import Util.DateUtil;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +32,15 @@ public class Customer extends javax.swing.JPanel {
     private Map<String, String> cbxTinhTrangMap = new HashMap<>();
     private Map<String, String> cbxGioiTinhMap = new HashMap<>();
 
+    private boolean checkSelectedRow;
+
     public Customer() {
         initComponents();
         initCbxDiemTichLuy();
         initCbxHangThanThiet();
         initCbxTinhTrang();
         initCbxGioiTinh();
+        noChangeDataTable();
         initTable();
         fillTable();
     }
@@ -121,6 +126,29 @@ public class Customer extends javax.swing.JPanel {
         khachHangSearchDTO.setTinhTrang(cbxTinhTrangMap.get(status.getSelectedItem()));
         khachHangSearchDTO.setGioiTinh(cbxGioiTinhMap.get(gender.getSelectedItem()));
         return khachHangSearchDTO;
+    }
+
+    private void refreshInputSearch() {
+        name.setText("");
+        fromBirthDate.setDate(null);
+        toBirthDate.setDate(null);
+        phoneNumber.setText("");
+        address.setText("");
+        diemTichLuy.setSelectedIndex(0);
+        hangThanThiet.setSelectedIndex(0);
+        status.setSelectedIndex(0);
+        gender.setSelectedIndex(0);
+    }
+
+    private void noChangeDataTable() {
+        tblModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells non-editable
+                return false;
+            }
+        };
+        tableCustomer.setModel(tblModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -320,6 +348,9 @@ public class Customer extends javax.swing.JPanel {
                 tableCustomerMouseClicked(evt);
             }
         });
+
+        tableCustomer.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         jScrollPane1.setViewportView(tableCustomer);
 
         cmnd.setEditable(false);
@@ -460,15 +491,18 @@ public class Customer extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {
         KhachHangSearchDTO khachHangSearchDTO = initKhachHangSearchDTO();
         if (khachHangBLL.search(khachHangSearchDTO).isEmpty()) {
+            checkSelectedRow = false;
             tblModel.setRowCount(0);
             JOptionPane.showMessageDialog(this, "Không tìm thấy kết quả phù hợp.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            checkSelectedRow = false;
             fillTable();
         }
     }
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {
-        Customer_Add_Dialog dialog = new Customer_Add_Dialog(new java.awt.Frame(), true);
+        refreshInputSearch();
+        Customer_Add_Dialog dialog = new Customer_Add_Dialog(new java.awt.Frame(), true, this);
         dialog.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent e) {
                 dialog.closeDialog();
@@ -479,48 +513,49 @@ public class Customer extends javax.swing.JPanel {
     }
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        refreshInputSearch();
+        if (!checkSelectedRow) {
+            JOptionPane.showMessageDialog(null, "Vui lòng click vào dòng khách hàng muốn xóa", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         String cmndCustomer = cmnd.getText();
         KhachHangDTO khachHangDTO = khachHangBLL.findByCMND(cmndCustomer);
         if (khachHangDTO == null) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng trong hệ thống", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             fillTable();
+            checkSelectedRow = false;
             return;
         }
 
         int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa khách hàng "
-                + khachHangDTO.getHoTen() + "\n\t\tCó căn cước công dân " + khachHangDTO.getCmnd(), "Xác nhận xóa khách hàng", JOptionPane.YES_NO_OPTION);
+                + khachHangDTO.getHoTen() + "\n          Có căn cước công dân " + khachHangDTO.getCmnd(), "Xác nhận xóa khách hàng", JOptionPane.YES_NO_OPTION);
 
         if (choice == JOptionPane.YES_NO_OPTION) {
             if (khachHangBLL.delete(khachHangDTO)) {
                 fillTable();
-                JOptionPane.showMessageDialog(null, "Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "         Xóa thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Xóa thất bại do khách hàng vẫn còn nằm bên hóa đơn vé bán", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+            checkSelectedRow = false;
             fillTable();
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        name.setText("");
-        fromBirthDate.setDate(null);
-        toBirthDate.setDate(null);
-        phoneNumber.setText("");
-        address.setText("");
-        diemTichLuy.setSelectedIndex(0);
-        hangThanThiet.setSelectedIndex(0);
-        status.setSelectedIndex(0);
-        gender.setSelectedIndex(0);
+        refreshInputSearch();
+        checkSelectedRow = false;
+        fillTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
 
     private void cmndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmndActionPerformed
-        
+
     }//GEN-LAST:event_cmndActionPerformed
 
     private void tableCustomerMouseClicked(java.awt.event.MouseEvent evt) {
@@ -528,6 +563,7 @@ public class Customer extends javax.swing.JPanel {
         if (selectRow >= 0) {
             String id = String.valueOf(tableCustomer.getValueAt(selectRow, 0));
             cmnd.setText(id);
+            checkSelectedRow = true;
         }
     }
 
