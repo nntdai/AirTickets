@@ -6,15 +6,16 @@
 package com.mycompany.airlineticket;
 
 import GUI.HomePage;
+import GUI.Login;
 
 /**
- *
  * @author User
  */
 public class AirlineTicket {
 
     public static void main(String[] args) {
-        HomePage hp=new HomePage();
-        hp.setVisible(true);
+         Login login=new Login();
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
     }
 }

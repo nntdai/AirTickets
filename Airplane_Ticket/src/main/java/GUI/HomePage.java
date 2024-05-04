@@ -4,17 +4,64 @@
  */
 package GUI;
 
+import DTO.TaiKhoanDTO;
+import java.awt.CardLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
+
 /**
- *
  * @author User
  */
 public class HomePage extends javax.swing.JFrame {
-
+    private JPanel cardPanel;
+    private CardLayout cardLayout;
+    TimChuyenBay_panel timchuyenbay = new TimChuyenBay_panel(this);
+    Arline_Ticket_Panel arline_Ticket_Panel1 ;
+     Ticket_Book_panel ticket_book ;
     /**
      * Creates new form Customer
      */
-    public HomePage() {
+    public HomePage(TaiKhoanDTO taikhoan ) {
         initComponents();
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+        cardPanel.add(timchuyenbay, "panel1");
+
+        cardLayout.show(cardPanel, "panel1");
+        jTabbedPane1.addTab("Đặt vé",cardPanel);
+        jLabel2.setText("Xin chào "+ taikhoan.getCmndNhanVien().getHo()+" " + taikhoan.getCmndNhanVien().getTen());
+        
+    }
+    public void chonVeMayBay()
+    {
+       
+        arline_Ticket_Panel1= new Arline_Ticket_Panel(this);
+        cardPanel.add(arline_Ticket_Panel1, "panel2");
+        cardLayout.show(cardPanel, "panel2");
+    }
+    public void lapHoaDon()
+    {
+        
+        Ticket_Book_panel ticket_book = new Ticket_Book_panel(this);
+        cardPanel.add(ticket_book, "panel3");
+        
+        cardLayout.show(cardPanel, "panel3");
+        
+    }
+    public void chonChuyenBay()
+    {
+        cardLayout.show(cardPanel, "panel1");
+    }
+
+    public TimChuyenBay_panel getTimchuyenbay() {
+        return timchuyenbay;
+    }
+    
+
+    private HomePage() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -29,7 +76,6 @@ public class HomePage extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         thongKe1 = new GUI.ThongKe();
-        arline_Ticket_Panel1 = new GUI.Arline_Ticket_Panel();
         ticket_Type_Panel1 = new GUI.Ticket_Type_Panel();
         ticket_Type_Panel3 = new GUI.Ticket_Type_Panel();
         customer1 = new GUI.Customer();
@@ -46,7 +92,6 @@ public class HomePage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 600));
-        setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(900, 600));
 
@@ -54,17 +99,16 @@ public class HomePage extends javax.swing.JFrame {
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(975, 465));
         jTabbedPane1.addTab("Thống kê", thongKe1);
-        jTabbedPane1.addTab("Đặt vé", arline_Ticket_Panel1);
 
         javax.swing.GroupLayout ticket_Type_Panel1Layout = new javax.swing.GroupLayout(ticket_Type_Panel1);
         ticket_Type_Panel1.setLayout(ticket_Type_Panel1Layout);
         ticket_Type_Panel1Layout.setHorizontalGroup(
             ticket_Type_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ticket_Type_Panel3, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+            .addComponent(ticket_Type_Panel3, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
         );
         ticket_Type_Panel1Layout.setVerticalGroup(
             ticket_Type_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ticket_Type_Panel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ticket_Type_Panel3, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Loại vé", ticket_Type_Panel1);
@@ -75,7 +119,7 @@ public class HomePage extends javax.swing.JFrame {
         bill_Panel1.setLayout(bill_Panel1Layout);
         bill_Panel1Layout.setHorizontalGroup(
             bill_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bill_Panel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+            .addComponent(bill_Panel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
         );
         bill_Panel1Layout.setVerticalGroup(
             bill_Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +139,6 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\OneDrive101203\\Documents\\NetBeansProjects\\Airplane_Ticket\\src\\main\\java\\images\\plane.png")); // NOI18N
         jLabel1.setText(" Airplane Ticker Store");
         jLabel1.setToolTipText("");
 
@@ -105,7 +148,7 @@ public class HomePage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 959, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -121,7 +164,6 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\OneDrive101203\\Documents\\NetBeansProjects\\Airplane_Ticket\\src\\main\\java\\images\\user.png")); // NOI18N
         jLabel2.setText(" Xin chào Xuân Trúc !");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -131,7 +173,7 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 443, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -154,7 +196,7 @@ public class HomePage extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -184,7 +226,6 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.Arline_Ticket_Panel arline_Ticket_Panel1;
     private GUI.Bill_Panel bill_Panel1;
     private GUI.Bill_Panel bill_Panel2;
     private GUI.Customer customer1;
