@@ -20,6 +20,7 @@ public class HomePage extends javax.swing.JFrame {
     private CardLayout cardLayout;
     TimChuyenBay_panel timchuyenbay = new TimChuyenBay_panel(this);
      Ticket_Book_panel ticket_book ;
+     TaiKhoanDTO taikhoannv;
     /**
      * Creates new form Customer
      */
@@ -31,8 +32,20 @@ public class HomePage extends javax.swing.JFrame {
         cardLayout.show(cardPanel, "panel1");
         jTabbedPane1.addTab("Đặt vé",cardPanel);
         jLabel2.setText("Xin chào "+ taikhoan.getCmndNhanVien().getHo()+" " + taikhoan.getCmndNhanVien().getTen());
+        taikhoannv=taikhoan;
         
     }
+    public void reset()
+    {
+        timchuyenbay = new TimChuyenBay_panel(this);
+        arline_Ticket_Panel1= new Arline_Ticket_Panel(this);
+        ticket_book = new Ticket_Book_panel(this);
+        cardLayout.show(cardPanel, "panel1");
+    }
+    public TaiKhoanDTO getTaikhoannv() {
+        return taikhoannv;
+    }
+    
     public void chonVeMayBay()
     {
        
@@ -43,7 +56,7 @@ public class HomePage extends javax.swing.JFrame {
     public void lapHoaDon()
     {
         
-        Ticket_Book_panel ticket_book = new Ticket_Book_panel(this);
+        ticket_book = new Ticket_Book_panel(this);
         cardPanel.add(ticket_book, "panel3");
         
         cardLayout.show(cardPanel, "panel3");
@@ -58,6 +71,9 @@ public class HomePage extends javax.swing.JFrame {
         return timchuyenbay;
     }
     
+    public Arline_Ticket_Panel getPanelVeDaChon() {
+        return arline_Ticket_Panel1;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

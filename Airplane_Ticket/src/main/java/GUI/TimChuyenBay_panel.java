@@ -47,7 +47,7 @@ public class TimChuyenBay_panel extends javax.swing.JPanel {
         jDateChooser1.setDate(date);
         jDateChooser1.setMinSelectableDate(date);
         Date date2= new Date();
-        date2.setDate(date2.getDate()+4);
+        date2.setDate(date2.getDate()+2);
         jDateChooser2.setDate(date2);
         jDateChooser2.setMinSelectableDate(date2);
         frame=homepage;

@@ -56,6 +56,9 @@ public class KhachHangBLL {
     public boolean update(KhachHangDTO khachHangDTO) {
         return khachHangDAO.update(khachHangDTO);
     }
+     public boolean updateDiem(String maKH,int diemtichluy,int maHang) {
+         return khachHangDAO.updateDiem(maKH, diemtichluy, maHang);
+     }
 
     public void validate(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
         String cmndStr = customer_add_dialog.getCmnd().getText().trim();
@@ -122,6 +125,15 @@ public class KhachHangBLL {
         if (khachHangDAO.findByPhoneNumber(phoneNumberStr) != null) {
             errorMessage.append("Số điện thoại đã tồn tại trong hệ thống\n");
         }
+    }
+    public KhachHangDTO KhachHangThanThiet(Customer_Add_Dialog customer_add_dialog)
+    {
+          String cmndStr = customer_add_dialog.getCmnd().getText().trim();
+
+        if (khachHangDAO.findByCMND(cmndStr) != null) {
+            return khachHangDAO.findByCMND(cmndStr);
+        }
+        return null;
     }
 
     //=================================

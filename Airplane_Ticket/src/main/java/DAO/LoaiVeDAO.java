@@ -27,7 +27,7 @@ public class LoaiVeDAO {
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String ngaydi= chuyenbaydi.getNgayDi().format(formatter);
-        String ngayve= (chuyenbaydi.getNgayDi().plus(3,ChronoUnit.DAYS)).format(formatter);
+        String ngayve= (chuyenbaydi.getNgayDi().plus(1,ChronoUnit.DAYS)).format(formatter);
         System.out.println(ngayve);
         Vector<LoaiVeMayBayDTO> arr = new Vector<LoaiVeMayBayDTO>();
         Connection con=BaseDAO.getConnection();
