@@ -593,7 +593,25 @@ public class Customer extends javax.swing.JPanel {
     }//GEN-LAST:event_cmndActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
+        refreshInputSearch();
+        String cmndCustomer = cmnd.getText();
+        KhachHangDTO khachHangDTO = khachHangBLL.findByCMND(cmndCustomer);
+        if (khachHangDTO == null) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy khách hàng trong hệ thống", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            fillTable();
+            checkSelectedRow = false;
+            return;
+        }
+        checkSelectedRow = false;
+
+        Customer_Detail_Dialog dialog = new Customer_Detail_Dialog(new java.awt.Frame(), true, this);
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                dialog.closeDialog(null);
+            }
+        });
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void tableCustomerMouseClicked(java.awt.event.MouseEvent evt) {
