@@ -26,6 +26,14 @@ public class Arline_Ticket_Panel extends javax.swing.JPanel {
     LoaiVeBLL loaiveBLL = new LoaiVeBLL();
     Vector<LoaiVeMayBayDTO> loaiveDS;
     Vector<LoaiVeMayBayDTO> loaiveDSVe;
+
+    public LoaiVeMayBayDTO getVedichon() {
+        return vedichon;
+    }
+
+    public LoaiVeMayBayDTO getVevechon() {
+        return vevechon;
+    }
     
     /**
      * Creates new form Arline_Ticket_Panel
@@ -324,10 +332,11 @@ public class Arline_Ticket_Panel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -352,6 +361,8 @@ public class Arline_Ticket_Panel extends javax.swing.JPanel {
         {
             if ((vevechon==null)||(vedichon==null))
                 JOptionPane.showMessageDialog(frame,"Có vé trống ");
+            else
+                 frame.lapHoaDon();
         }
         else if (frame.getTimchuyenbay().chuyenbayve==null)
                 if (vedichon==null)

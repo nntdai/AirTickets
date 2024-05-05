@@ -123,6 +123,15 @@ public class KhachHangBLL {
             errorMessage.append("Số điện thoại đã tồn tại trong hệ thống\n");
         }
     }
+    public KhachHangDTO KhachHangThanThiet(Customer_Add_Dialog customer_add_dialog)
+    {
+          String cmndStr = customer_add_dialog.getCmnd().getText().trim();
+
+        if (khachHangDAO.findByCMND(cmndStr) != null) {
+            return khachHangDAO.findByCMND(cmndStr);
+        }
+        return null;
+    }
 
     //=================================
     public void validate(StringBuilder errorMessage, Customer_Update customer_update) {
