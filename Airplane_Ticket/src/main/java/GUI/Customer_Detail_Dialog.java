@@ -7,6 +7,7 @@ package GUI;
 import BLL.HangThanThietBLL;
 import BLL.KhachHangBLL;
 import DTO.KhachHangDTO;
+import Util.DateUtil;
 import Util.ParseLocalDateToDateUtil;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +36,7 @@ public class Customer_Detail_Dialog extends java.awt.Dialog {
         KhachHangDTO khachHangDTO = khachHangBLL.findByCMND(cmndCustomer);
         cmnd.setText(khachHangDTO.getCmnd());
         name.setText(khachHangDTO.getHoTen());
-        birthDate.setText(khachHangDTO.getNgaySinh().toString());
+        birthDate.setText(DateUtil.formatDate(khachHangDTO.getNgaySinh().toString()));
         gender.setText(khachHangDTO.isGioiTinh() ? "Nam" : "Nữ");
         phoneNumber.setText(khachHangDTO.getSoDienThoai());
         diemTichLuy.setText(String.valueOf(khachHangDTO.getDiemTichLuy()));
