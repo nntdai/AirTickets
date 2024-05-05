@@ -49,7 +49,6 @@ public class Ticket_Book_panel extends javax.swing.JPanel {
         DefaultTableModel model= (DefaultTableModel) jTable1.getModel();
         vedi=frame.getPanelVeDaChon().getVedichon();
         veve=frame.getPanelVeDaChon().getVevechon();
-        JOptionPane.showMessageDialog(home, veve.getId());
         soLuong=frame.timchuyenbay.getSoLuong();
         tongtienve =vedi.getGiaVe().multiply(BigDecimal.valueOf(soLuong));
         model.setRowCount(0);
