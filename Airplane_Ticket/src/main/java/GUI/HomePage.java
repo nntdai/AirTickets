@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import DTO.TaiKhoanDTO;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  * @author User
  */
@@ -12,10 +16,48 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form Customer
      */
-    public HomePage() {
+   private JPanel cardPanel;
+    private CardLayout cardLayout;
+    TimChuyenBay_panel timchuyenbay = new TimChuyenBay_panel(this);
+     Ticket_Book_panel ticket_book ;
+    /**
+     * Creates new form Customer
+     */
+    public HomePage(TaiKhoanDTO taikhoan ) {
         initComponents();
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+        cardPanel.add(timchuyenbay, "panel1");
+        cardLayout.show(cardPanel, "panel1");
+        jTabbedPane1.addTab("Đặt vé",cardPanel);
+        jLabel2.setText("Xin chào "+ taikhoan.getCmndNhanVien().getHo()+" " + taikhoan.getCmndNhanVien().getTen());
+        
+    }
+    public void chonVeMayBay()
+    {
+       
+        arline_Ticket_Panel1= new Arline_Ticket_Panel(this);
+        cardPanel.add(arline_Ticket_Panel1, "panel2");
+        cardLayout.show(cardPanel, "panel2");
+    }
+    public void lapHoaDon()
+    {
+        
+        Ticket_Book_panel ticket_book = new Ticket_Book_panel(this);
+        cardPanel.add(ticket_book, "panel3");
+        
+        cardLayout.show(cardPanel, "panel3");
+        
+    }
+    public void chonChuyenBay()
+    {
+        cardLayout.show(cardPanel, "panel1");
     }
 
+    public TimChuyenBay_panel getTimchuyenbay() {
+        return timchuyenbay;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,39 +153,7 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomePage().setVisible(true);
-            }
-        });
-    }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.Arline_Ticket_Panel arline_Ticket_Panel1;
     private GUI.Bill_Panel bill_Panel1;
