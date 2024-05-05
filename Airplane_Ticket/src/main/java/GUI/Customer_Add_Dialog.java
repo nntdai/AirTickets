@@ -20,6 +20,13 @@ import java.util.Map;
 public class Customer_Add_Dialog extends java.awt.Dialog {
     private KhachHangBLL khachHangBLL = new KhachHangBLL();
     private Map<String, String> cbxGioiTinhMap = new HashMap<>();
+<<<<<<< HEAD
+
+    public Customer_Add_Dialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        initCbxGioiTinh();
+=======
     private Customer customer;
 
     public Customer_Add_Dialog(java.awt.Frame parent, boolean modal, Customer customer) {
@@ -27,6 +34,7 @@ public class Customer_Add_Dialog extends java.awt.Dialog {
         initComponents();
         initCbxGioiTinh();
         this.customer = customer;
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
     }
 
     private void initCbxGioiTinh() {
@@ -127,6 +135,15 @@ public class Customer_Add_Dialog extends java.awt.Dialog {
                 btnAddActionPerformed(evt);
             }
         });
+<<<<<<< HEAD
+
+        address.setColumns(20);
+        address.setRows(5);
+        jScrollPane1.setViewportView(address);
+
+        birthDate.setDateFormatString("yyyy-MM-dd");
+=======
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
 
         address.setColumns(20);
         address.setRows(5);
@@ -259,12 +276,19 @@ public class Customer_Add_Dialog extends java.awt.Dialog {
         khachHangDTO.setDiaChi(address.getText());
         closeDialog();
         if (khachHangBLL.create(khachHangDTO)) {
+<<<<<<< HEAD
+            JOptionPane.showMessageDialog(null, "Thêm mới thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Thêm mới thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+=======
             customer.loadDataTable();
             JOptionPane.showMessageDialog(null, "      Thêm mới thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Thêm mới thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         customer.loadDataTable();
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
     }
 
     /**

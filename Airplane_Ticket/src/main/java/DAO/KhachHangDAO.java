@@ -163,7 +163,10 @@ public class KhachHangDAO {
                 hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
                 khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
+<<<<<<< HEAD
+=======
                 khachHangDTO.setGioiTinh(resultSet.getBoolean("gioiTinh"));
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
                 BaseDAO.closeConnection();
                 return khachHangDTO;
             }
@@ -200,7 +203,10 @@ public class KhachHangDAO {
                 hangThanThietDTO.setKhuyenMai(resultSet.getInt("khuyenMai"));
                 khachHangDTO.setIdHangThanThiet(hangThanThietDTO);
                 khachHangDTO.setTinhTrang(resultSet.getBoolean("tinhTrang"));
+<<<<<<< HEAD
+=======
                 khachHangDTO.setGioiTinh(resultSet.getBoolean("gioiTinh"));
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
                 BaseDAO.closeConnection();
                 return khachHangDTO;
             }
@@ -253,6 +259,8 @@ public class KhachHangDAO {
             return false;
         }
     }
+<<<<<<< HEAD
+=======
 
     public boolean update(KhachHangDTO khachHangDTO) {
         try {
@@ -279,4 +287,5 @@ public class KhachHangDAO {
             return false;
         }
     }
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
 }

@@ -4,11 +4,21 @@ import DAO.KhachHangDAO;
 import DTO.KhachHangDTO;
 import DTO.KhachHangSearchDTO;
 import GUI.Customer_Add_Dialog;
+<<<<<<< HEAD
+import Util.DateJcalendarUtil;
+
+import javax.swing.*;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+=======
 import GUI.Customer_Update;
 import Util.DateJcalendarUtil;
 
 import java.time.LocalDate;
 import java.util.List;
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
 
 public class KhachHangBLL {
     private KhachHangDAO khachHangDAO = new KhachHangDAO();
@@ -53,6 +63,15 @@ public class KhachHangBLL {
         return khachHangDAO.create(khachHangDTO);
     }
 
+<<<<<<< HEAD
+    public void validate(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
+        String cmndStr = customer_add_dialog.getCmnd().getText();
+        String nameStr = customer_add_dialog.getTextFieldName();
+        String birthDateStr = DateJcalendarUtil.formatDate(customer_add_dialog.getBirthDate().getDate());
+        String genderStr = customer_add_dialog.getGender().getSelectedItem().toString();
+        String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText();
+        String addressStr = customer_add_dialog.getAddress().getText();
+=======
     public boolean update(KhachHangDTO khachHangDTO) {
         return khachHangDAO.update(khachHangDTO);
     }
@@ -64,6 +83,7 @@ public class KhachHangBLL {
         String genderStr = customer_add_dialog.getGender().getSelectedItem().toString();
         String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText().trim();
         String addressStr = customer_add_dialog.getAddress().getText().trim();
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
 
         if (cmndStr.isEmpty()) {
             errorMessage.append("Căn cước công dân không được để trống\n");
@@ -109,7 +129,11 @@ public class KhachHangBLL {
     }
 
     public void validateCmndExists(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
+<<<<<<< HEAD
+        String cmndStr = customer_add_dialog.getCmnd().getText();
+=======
         String cmndStr = customer_add_dialog.getCmnd().getText().trim();
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
 
         if (khachHangDAO.findByCMND(cmndStr) != null) {
             errorMessage.append("Căn cước công dân đã tồn tại trong hệ thống\n");
@@ -117,6 +141,9 @@ public class KhachHangBLL {
     }
 
     public void validatePhoneNumberExists(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
+<<<<<<< HEAD
+        String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText();
+=======
         String phoneNumberStr = customer_add_dialog.getPhoneNumber().getText().trim();
 
         if (khachHangDAO.findByPhoneNumber(phoneNumberStr) != null) {
@@ -177,6 +204,7 @@ public class KhachHangBLL {
 
     public void validatePhoneNumberExists(StringBuilder errorMessage, Customer_Update customer_update) {
         String phoneNumberStr = customer_update.getPhoneNumber().getText().trim();
+>>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
 
         if (khachHangDAO.findByPhoneNumber(phoneNumberStr) != null) {
             errorMessage.append("Số điện thoại đã tồn tại trong hệ thống\n");
