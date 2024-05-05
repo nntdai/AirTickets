@@ -3,13 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/AWTForms/Dialog.java to edit this template
  */
 package GUI;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 /**
  *
  * @author User
  */
 public class ThemSanBay_Dialog extends java.awt.Dialog {
-
     /**
      * Creates new form ThemSanBay_Dialog
      */
@@ -17,7 +18,24 @@ public class ThemSanBay_Dialog extends java.awt.Dialog {
         super(parent, modal);
         initComponents();
     }
-
+    public JButton getbtn_add(){
+        return add_sb;
+    }
+    public JButton getbtn_refresh(){
+        return refresh;
+    }
+    public String getma(){
+        return msb_tf.getText();
+    }
+    public String getvitri(){
+        return vt_tf.getText();
+    }
+    public JTextField getmsb_tf(){
+        return msb_tf;
+    }
+    public JTextField getvt_tf(){
+        return vt_tf;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,9 +48,11 @@ public class ThemSanBay_Dialog extends java.awt.Dialog {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        msb_tf = new javax.swing.JTextField();
+        add_sb = new javax.swing.JButton();
+        refresh = new javax.swing.JButton();
+        vt_tf = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -51,21 +71,26 @@ public class ThemSanBay_Dialog extends java.awt.Dialog {
         add(jPanel1, java.awt.BorderLayout.NORTH);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel2.setText("Vị trí :");
+        jLabel2.setText("Mã sân bay :");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jTextField1.setText("jTextField1");
-        jTextField1.setBorder(null);
+        msb_tf.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        msb_tf.setBorder(null);
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Thêm sân bay");
+        add_sb.setBackground(new java.awt.Color(0, 153, 255));
+        add_sb.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        add_sb.setForeground(new java.awt.Color(255, 255, 255));
+        add_sb.setText("Thêm sân bay");
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Xóa trắng");
+        refresh.setBackground(new java.awt.Color(0, 153, 255));
+        refresh.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        refresh.setForeground(new java.awt.Color(255, 255, 255));
+        refresh.setText("Xóa trắng");
+
+        vt_tf.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        vt_tf.setBorder(null);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel3.setText("Vị trí :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -77,11 +102,15 @@ public class ThemSanBay_Dialog extends java.awt.Dialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(msb_tf))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(add_sb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vt_tf)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -89,13 +118,17 @@ public class ThemSanBay_Dialog extends java.awt.Dialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(msb_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(vt_tf)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(add_sb, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -130,12 +163,14 @@ public class ThemSanBay_Dialog extends java.awt.Dialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton add_sb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField msb_tf;
+    private javax.swing.JButton refresh;
+    private javax.swing.JTextField vt_tf;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,6 +10,7 @@ C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\mai
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\BLL\KhachHangBLL.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\BLL\HoaDonVeBanBLL.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\GUI\Staff_Account_Add_Dialog.java
+C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\GUI\ChiTietSanBay_DaXoa_Dialog.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\GUI\ThemSanBay_Dialog.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\GUI\Ticket_Type_Detail_Dialog.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\DTO\VeMayBayDTO.java
@@ -42,6 +43,7 @@ C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\mai
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\DTO\TaiKhoanDTO.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\Util\DateUtil.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\BLL\LoaiVeBLL.java
+C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\GUI\Clock.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\DAO\SanBayDAO.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\DAO\KhachHangDAO.java
 C:\Users\ADMIN\Desktop\JAVA CLASS\Project_git\AirTickets\Airplane_Ticket\src\main\java\GUI\Staff_Bill_List_Dialog.java

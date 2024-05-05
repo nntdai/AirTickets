@@ -26,7 +26,6 @@ public class VeMayBayDAO {
             preparedStatement.setBoolean(4,vemaybay.isTinhTrang());
             if (vemaybay.getIdLoaiVeMayVe()!=null)
             {
-            JOptionPane.showMessageDialog(null,vemaybay.getIdLoaiVeMayVe().getId() );
             preparedStatement.setInt(5, vemaybay.getIdLoaiVeMayVe().getId());
             }
             else

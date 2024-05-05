@@ -43,5 +43,37 @@ public class SanBayBLL {
          }
          return dsSanBaySearch;
      }
+     public Vector<SanBayDTO> getAll() throws SQLException{
+        return sanbayDAO.DanhSachSanBay();
+    }
+    public boolean addSanBay(SanBayDTO sb) throws SQLException{
+        return sanbayDAO.addSanBay(sb);
+    }
+    public boolean updateSanBay(SanBayDTO sb) throws SQLException{
+        return sanbayDAO.updateSanBay(sb);
+    }
+    public boolean deleteSanBay(SanBayDTO sb) throws SQLException{
+        return sanbayDAO.deleteSanBay(sb);
+    }
+    public Vector<SanBayDTO> getstatus(boolean status) throws SQLException{
+        return sanbayDAO.getstatus(status);
+    }
+    public Vector<SanBayDTO> getid(String ma, int status) throws SQLException{
+        if(status==1){
+            return sanbayDAO.getid(ma, true);
+        }else{
+            return sanbayDAO.getid(ma, false);
+        }
+    }
+    public Vector<SanBayDTO> getvitri(String vitri, int status) throws SQLException{
+        if(status==1){
+            return sanbayDAO.getvitri(vitri, true);
+        }else{
+            return sanbayDAO.getvitri(vitri, false);
+        }
+    }
+    public boolean checkid(String ma) throws SQLException{
+        return sanbayDAO.checkid(ma);
+    }
     
 }

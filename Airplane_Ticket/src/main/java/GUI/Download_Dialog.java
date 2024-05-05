@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author User
@@ -17,7 +20,9 @@ public class Download_Dialog extends java.awt.Dialog {
         super(parent, modal);
         initComponents();
     }
-
+    public JFileChooser getpath(){
+        return jFileChooser2;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +32,7 @@ public class Download_Dialog extends java.awt.Dialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jFileChooser2 = new javax.swing.JFileChooser();
 
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -35,15 +41,25 @@ public class Download_Dialog extends java.awt.Dialog {
             }
         });
 
+        jFileChooser2.setAcceptAllFileFilterUsed(false);
+        jFileChooser2.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        jFileChooser2.setFileFilter(new FileNameExtensionFilter("Tệp Excel (.xlsx, .xls)", "xlsx", "xls"));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jFileChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -87,6 +103,7 @@ public class Download_Dialog extends java.awt.Dialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
