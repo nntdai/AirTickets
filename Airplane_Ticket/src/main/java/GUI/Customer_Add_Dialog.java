@@ -5,6 +5,7 @@
 package GUI;
 
 import BLL.KhachHangBLL;
+import DTO.HangThanThietDTO;
 import DTO.KhachHangDTO;
 import Util.DateJcalendarUtil;
 import com.toedter.calendar.JDateChooser;
@@ -476,6 +477,12 @@ public class Customer_Add_Dialog extends java.awt.Dialog {
         khachhang.setGioiTinh(Boolean.parseBoolean(cbxGioiTinhMap.get(gender.getSelectedItem())));
         khachhang.setSoDienThoai(phoneNumber.getText());
         khachhang.setDiaChi(address.getText());
+        khachhang.setDiemTichLuy(0);
+        HangThanThietDTO hangthanthiet=new HangThanThietDTO();
+        hangthanthiet.setId(1);
+        hangthanthiet.setTenHang("Sắt");
+        hangthanthiet.setKhuyenMai(0);
+        khachhang.setIdHangThanThiet(hangthanthiet);
         JOptionPane.showMessageDialog(null, "Nhập thông tin thành công !");
         dispose();
 //        if (khachHangBLL.create(khachHangDTO)) {

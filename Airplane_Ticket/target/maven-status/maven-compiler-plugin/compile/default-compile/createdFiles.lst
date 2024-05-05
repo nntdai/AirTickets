@@ -1,11 +1,14 @@
 DAO\KhachHangDAO.class
 BLL\KhachHangBLL.class
 GUI\TimChuyenBay_panel$7.class
+BLL\HoaDonVeBanBLL.class
 GUI\Customer_Update$5.class
 GUI\Ticket_Book_panel$3.class
 GUI\ThongTinVeMayBay_Dialog.class
 GUI\SanBayDi_Dialog$2.class
+BLL\VeMayBayBLL.class
 DTO\KhachHangDTO.class
+DAO\HoaDonVeBanDAO.class
 GUI\Customer$1.class
 GUI\Ticket_Book_panel$4.class
 GUI\TimChuyenBay_panel$2.class
@@ -62,6 +65,7 @@ DTO\NhanVienDTO.class
 GUI\SanBayDi_Dialog$4.class
 DTO\KhachHangSearchDTO.class
 BLL\HangThanThietBLL.class
+DAO\VeMayBayDAO.class
 DTO\HoaDonVeBanDTO.class
 GUI\ThongTinVeMayBay_Dialog$1.class
 DTO\HoanVeDTO.class

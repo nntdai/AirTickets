@@ -56,6 +56,9 @@ public class KhachHangBLL {
     public boolean update(KhachHangDTO khachHangDTO) {
         return khachHangDAO.update(khachHangDTO);
     }
+     public boolean updateDiem(String maKH,int diemtichluy,int maHang) {
+         return khachHangDAO.updateDiem(maKH, diemtichluy, maHang);
+     }
 
     public void validate(StringBuilder errorMessage, Customer_Add_Dialog customer_add_dialog) {
         String cmndStr = customer_add_dialog.getCmnd().getText().trim();
