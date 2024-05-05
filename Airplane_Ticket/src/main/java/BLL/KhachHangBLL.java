@@ -129,6 +129,7 @@ public class KhachHangBLL {
         String nameStr = customer_update.getName().trim();
         String birthDateStr = DateJcalendarUtil.formatDate(customer_update.getBirthDate().getDate());
         String phoneNumberStr = customer_update.getPhoneNumber().getText().trim();
+        String diemTichLuyStr = customer_update.getDiemTichLuy().getText().trim();
         String addressStr = customer_update.getAddress().getText().trim();
 
         if (nameStr.isEmpty()) {
@@ -155,6 +156,18 @@ public class KhachHangBLL {
             errorMessage.append("Số điện thoại tối đa 11 số\n");
         } else if (phoneNumberStr.length() < 10){
             errorMessage.append("Số điện thoại tối thiểu 10 số\n");
+        }
+
+        if (diemTichLuyStr.isEmpty()) {
+            errorMessage.append("Điểm tích lũy không được để trống\n");
+        } else {
+            try {
+                if (Integer.parseInt(diemTichLuyStr) < 0) {
+                    errorMessage.append("Điểm tích tối thiểu là 0\n");
+                }
+            } catch (NumberFormatException e) {
+                errorMessage.append("Điểm tích lũy phải là số và không vượt quá 2.100.000.000\n");
+            }
         }
 
         if (addressStr.isEmpty()) {
