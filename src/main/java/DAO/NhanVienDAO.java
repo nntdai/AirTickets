@@ -141,4 +141,49 @@ public class NhanVienDAO {
 
     }
 
+    public List<NhanVienDTO> Search(String keyword, String searchType) {
+        List<NhanVienDTO> nhanVienList = new ArrayList<>();
+        try {
+            Connection connection = BaseDAO.getConnection();
+            PreparedStatement preparedStatement = null;
+
+            String sql = "SELECT cmnd, ho, ten, soDienThoai FROM nhanvien WHERE ";
+
+            if (searchType.equals("name")) {
+                sql += "CONCAT(ho, ' ', ten) LIKE ?";
+            } else if (searchType.equals("phone")) {
+                sql += "soDienThoai = ?";
+            } else if (searchType.equals("id")) {
+                sql += "cmnd = ?";
+            } else if (searchType.equals("all")) {
+                sql += "CONCAT(ho, ' ', ten) LIKE ? OR soDienThoai = ? OR cmnd = ?";
+            }
+
+            preparedStatement = connection.prepareStatement(sql);
+
+            if (searchType.equals("all")) {
+                preparedStatement.setString(1, "%" + keyword + "%");
+                preparedStatement.setString(2, keyword);
+                preparedStatement.setString(3, keyword);
+            } else {
+                preparedStatement.setString(1, "%" + keyword + "%");
+            }
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Duyệt qua kết quả và thêm vào danh sách nhanVienList
+            while (resultSet.next()) {
+                NhanVienDTO nhanvien = new NhanVienDTO();
+                nhanvien.setCmnd(resultSet.getString("cmnd"));
+                nhanvien.setHo(resultSet.getString("ho"));
+                nhanvien.setTen(resultSet.getString("ten"));
+                nhanvien.setSoDienThoai(resultSet.getString("soDienThoai"));
+                nhanVienList.add(nhanvien);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nhanVienList;
+    }
+
 }

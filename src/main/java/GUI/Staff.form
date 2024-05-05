@@ -28,9 +28,9 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="262" max="-2" attributes="0"/>
+                              <Component id="textsearch" min="-2" pref="262" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="combobox" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -45,9 +45,9 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jComboBox1" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="combobox" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="textsearch" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -122,7 +122,7 @@
         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="combobox">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -140,7 +140,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="textsearch">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -149,6 +149,9 @@
           <Border info="null"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textsearchActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
 

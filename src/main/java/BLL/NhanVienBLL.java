@@ -9,6 +9,7 @@ import DTO.NhanVienDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
 
 /**
  *
@@ -47,5 +48,10 @@ public class NhanVienBLL {
     public static void update(NhanVienDTO nhanvien, String cmnd) throws SQLException{
         NhanVienDAO nhanvienDAO = new NhanVienDAO();
         nhanvienDAO.update(nhanvien, cmnd); 
-    } 
+    }
+    
+    public static List<NhanVienDTO> SearchBLL(String keyword, String searchType){
+        NhanVienDAO nhanvienDAO = new NhanVienDAO();
+        return nhanvienDAO.Search(keyword, searchType);
+    }
 }
