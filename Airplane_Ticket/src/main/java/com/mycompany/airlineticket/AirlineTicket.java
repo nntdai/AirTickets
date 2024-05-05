@@ -14,14 +14,8 @@ import GUI.Login;
 public class AirlineTicket {
 
     public static void main(String[] args) {
-<<<<<<< HEAD
          Login login=new Login();
         login.setLocationRelativeTo(null);
         login.setVisible(true);
-=======
-        HomePage hp = new HomePage();
-        hp.setLocationRelativeTo(null);
-        hp.setVisible(true);
->>>>>>> 25d72133c35b3aff8fc0074528ca698473093955
     }
 }

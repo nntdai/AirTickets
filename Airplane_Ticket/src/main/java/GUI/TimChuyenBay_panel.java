@@ -414,7 +414,7 @@ public class TimChuyenBay_panel extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String choose= buttonGroup1.getSelection().getActionCommand();
         soLuong =Integer.parseInt(jSpinner1.getValue().toString());
-        SimpleDateFormat dcn = new SimpleDateFormat("yyyy-dd-MM");
+        SimpleDateFormat dcn = new SimpleDateFormat("yyyy-MM-dd");
         String ngaydiString = dcn.format(jDateChooser1.getDate())+" 00:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         ngaydi = LocalDateTime.parse(ngaydiString, formatter);
@@ -446,7 +446,7 @@ public class TimChuyenBay_panel extends javax.swing.JPanel {
           chuyenbayve.setMaSanBayDi(sanbayve);
           chuyenbayve.setMaSanBayDen(sanbaydi);
           chuyenbayve.setNgayDi(ngayve);
-             frame.chonVeMayBay();
+          frame.chonVeMayBay();
         }
         }
         

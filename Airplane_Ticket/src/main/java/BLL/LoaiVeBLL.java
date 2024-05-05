@@ -20,5 +20,8 @@ public class LoaiVeBLL {
     {
         return loaiveDAO.DanhSachVeChieuDi(chuyenbaydi);
     }
-    
+    public Vector<LoaiVeMayBayDTO> DanhSachVeChieuVe(ChuyenBayDTO chuyenbayve) throws SQLException
+    {
+        return loaiveDAO.DanhSachVeChieuVe(chuyenbayve);
+    }
 }

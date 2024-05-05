@@ -28,29 +28,31 @@ public class Arline_Ticket_Panel extends javax.swing.JPanel {
         initComponents();
         frame=homepage;
         try {
-            danhsachloaive();
+            danhsachloaivedi();
         } catch (SQLException ex) {
             Logger.getLogger(Arline_Ticket_Panel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (frame.getTimchuyenbay().chuyenbayve==null)
-        {
-            jScrollPane2.setVisible(false);
+         jScrollPane2.setVisible(false);
             jLabel5.setVisible(false);
+        if (frame.getTimchuyenbay().chuyenbayve!=null)
+        {
+            jScrollPane2.setVisible(true);
+            jLabel5.setVisible(true);
         }
         
         
     }
-    private BigDecimal tienVe()
-    {
-        int row =jTable1.getSelectedRow();
-        int soluong=frame.timchuyenbay.getSoLuong();
-        return BigDecimal.valueOf(Double.parseDouble(jTable1.getValueAt(row, 7).toString())).multiply(soluong);
-    }
+//    private BigDecimal tienVe()
+//    {
+//        int row =jTable1.getSelectedRow();
+//        int soluong=frame.timchuyenbay.getSoLuong();
+//        return BigDecimal.valueOf(Double.parseDouble(jTable1.getValueAt(row, 7).toString())).multiply(soluong);
+//    }
     public void setHomePage(HomePage home)
     {
         frame=home;
     }
-    private void danhsachloaive() throws SQLException
+    private void danhsachloaivedi() throws SQLException
     { 
         DefaultTableModel model ;
         model= (DefaultTableModel) jTable1.getModel();
@@ -61,9 +63,23 @@ public class Arline_Ticket_Panel extends javax.swing.JPanel {
             
             Object[] row={a.getId(),a.getIdChuyenBay().getMaSanBayDi().getMaSanBay(),a.getIdChuyenBay().getMaSanBayDen().getMaSanBay(),a.getIdChuyenBay().getNgayDi(),a.getIdChuyenBay().getNgayDen(),a.getIdChuyenBay().getThoiGianBay(),a.getHangVe(),a.getGiaVe(),a.getSoLuongVeCon()};
             model.addRow(row);
+        
         }
     }
-
+    private void danhsachloaiveve() throws SQLException
+    { 
+        DefaultTableModel model ;
+        model= (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        Vector<LoaiVeMayBayDTO> loaiveDS= loaiveBLL.DanhSachVeChieuVe(frame.getTimchuyenbay().getChuyenbayve());
+        for (LoaiVeMayBayDTO a:loaiveDS)
+        {
+            
+            Object[] row={a.getId(),a.getIdChuyenBay().getMaSanBayDi().getMaSanBay(),a.getIdChuyenBay().getMaSanBayDen().getMaSanBay(),a.getIdChuyenBay().getNgayDi(),a.getIdChuyenBay().getNgayDen(),a.getIdChuyenBay().getThoiGianBay(),a.getHangVe(),a.getGiaVe(),a.getSoLuongVeCon()};
+            model.addRow(row);
+        
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
