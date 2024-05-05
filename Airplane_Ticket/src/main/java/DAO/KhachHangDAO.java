@@ -279,4 +279,22 @@ public class KhachHangDAO {
             return false;
         }
     }
+    public boolean updateDiem(String maKH,int diemtichluy,int maHang) {
+        try {
+            PreparedStatement preparedStatement = BaseDAO.getConnection()
+                    .prepareStatement("UPDATE khachhang SET diemTichLuy = ?, " +
+                            "idHangThanThiet = ? WHERE cmnd = ? ");
+
+            preparedStatement.setInt(1, diemtichluy);
+            preparedStatement.setInt(2, maHang);
+            preparedStatement.setString(3, maKH);
+            
+            boolean success = preparedStatement.executeUpdate() > 0;
+            BaseDAO.closeConnection();
+            return success;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -6,6 +6,9 @@ package GUI;
 
 import DTO.TaiKhoanDTO;
 import java.awt.CardLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -18,8 +21,12 @@ public class HomePage extends javax.swing.JFrame {
      */
     private JPanel cardPanel;
     private CardLayout cardLayout;
+
     TimChuyenBay_panel timchuyenbay = new TimChuyenBay_panel(this);
-    Ticket_Book_panel ticket_book ;
+    Ticket_Book_panel ticket_book;
+    Arline_Ticket_Panel arline_Ticket_Panel1;
+    TaiKhoanDTO taikhoannv;
+
     /**
      * Creates new form Customer
      */
@@ -27,37 +34,59 @@ public class HomePage extends javax.swing.JFrame {
         initComponents();
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
+        timchuyenbay = new TimChuyenBay_panel(this);
         cardPanel.add(timchuyenbay, "panel1");
         cardLayout.show(cardPanel, "panel1");
-        jTabbedPane1.addTab("Đặt vé",cardPanel);
-        jLabel2.setText("Xin chào "+ taikhoan.getCmndNhanVien().getHo()+" "+taikhoan.getCmndNhanVien().getTen());
-        
+        jTabbedPane1.addTab("Đặt vé", cardPanel);
+
+        jLabel2.setText("Xin chào " + taikhoan.getCmndNhanVien().getHo() + " " + taikhoan.getCmndNhanVien().getTen());
+
+        jLabel2.setText("Xin chào " + taikhoan.getCmndNhanVien().getHo() + " " + taikhoan.getCmndNhanVien().getTen());
+        taikhoannv = taikhoan;
+        Thread clock = new Clock(jLabel3);
+        clock.start();
+
     }
-    public void chonVeMayBay()
-    {
-       
+
+    public void reset() {
+        timchuyenbay = new TimChuyenBay_panel(this);
+        cardPanel.add(timchuyenbay, "panel1");
+        cardLayout.show(cardPanel, "panel1");
+    }
+
+    public TaiKhoanDTO getTaikhoannv() {
+        return taikhoannv;
+    }
+
+    public void chonVeMayBay() {
+
         Arline_Ticket_Panel arline_Ticket_Panel1 = new Arline_Ticket_Panel(this);
         cardPanel.add(arline_Ticket_Panel1, "panel2");
         cardLayout.show(cardPanel, "panel2");
     }
-    public void lapHoaDon()
-    {
-        
-        Ticket_Book_panel ticket_book = new Ticket_Book_panel(this);
+
+    public void lapHoaDon() {
+
+        ticket_book = new Ticket_Book_panel(this);
         cardPanel.add(ticket_book, "panel3");
-        
+
         cardLayout.show(cardPanel, "panel3");
-        
+
     }
-    public void chonChuyenBay()
-    {
+
+    public void chonChuyenBay() {
         cardLayout.show(cardPanel, "panel1");
     }
 
     public TimChuyenBay_panel getTimchuyenbay() {
         return timchuyenbay;
     }
-    
+
+    public Arline_Ticket_Panel getPanelVeDaChon() {
+
+        return arline_Ticket_Panel1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,7 +216,7 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.Bill_Panel bill_Panel1;
     private GUI.Bill_Panel bill_Panel2;
