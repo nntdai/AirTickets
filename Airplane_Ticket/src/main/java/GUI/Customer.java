@@ -16,6 +16,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -344,14 +346,17 @@ public class Customer extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableCustomer.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  // chỉ được chọn 1 dòng
         tableCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableCustomerMouseClicked(evt);
             }
         });
+
         jScrollPane1.setViewportView(tableCustomer);
 
         cmnd.setEditable(false);
+        cmnd.setVisible(false);
         cmnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmndActionPerformed(evt);

@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -256,7 +257,7 @@ public class Customer_Update extends javax.swing.JFrame {
                         }
                     }
                 } catch (NumberFormatException e) {
-                     JOptionPane.showMessageDialog(null, "Điểm tích lũy đã vượt quá giới hạn", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Điểm tích lũy đã vượt quá giới hạn", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
