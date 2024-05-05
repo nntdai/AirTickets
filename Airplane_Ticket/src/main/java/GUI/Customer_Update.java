@@ -239,21 +239,24 @@ public class Customer_Update extends javax.swing.JFrame {
             }
 
             private void updateComboBox() {
-                String inputText = diemTichLuy.getText();
-                if (!inputText.matches("^[0-9]+$") || inputText.equals("")) {
-                    diemTichLuy.setText("0");
-                }
-                int inputValue = Integer.parseInt(inputText);
-                if (inputValue >= 500) {
-                    hangThanThiet.setSelectedIndex(4);
-                } else if (inputValue >= 300) {
-                    hangThanThiet.setSelectedIndex(3);
-                } else if (inputValue >= 200) {
-                    hangThanThiet.setSelectedIndex(2);
-                } else if (inputValue >= 100) {
-                    hangThanThiet.setSelectedIndex(1);
-                } else {
-                    hangThanThiet.setSelectedIndex(0);
+                try {
+                    String inputText = diemTichLuy.getText().trim();
+                    if (inputText.matches("^[0-9]+$") && inputText.length() <= 10) {
+                        int inputValue = Integer.parseInt(inputText);
+                        if (inputValue >= 500) {
+                            hangThanThiet.setSelectedIndex(4);
+                        } else if (inputValue >= 300) {
+                            hangThanThiet.setSelectedIndex(3);
+                        } else if (inputValue >= 200) {
+                            hangThanThiet.setSelectedIndex(2);
+                        } else if (inputValue >= 100) {
+                            hangThanThiet.setSelectedIndex(1);
+                        } else {
+                            hangThanThiet.setSelectedIndex(0);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                     JOptionPane.showMessageDialog(null, "Điểm tích lũy đã vượt quá giới hạn", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
