@@ -16,7 +16,9 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class Login extends javax.swing.JFrame {
-    TaiKhoanBLL taikhoanBLL=new TaiKhoanBLL();
+
+    TaiKhoanBLL taikhoanBLL = new TaiKhoanBLL();
+
     /**
      * Creates new form Login
      */
@@ -136,34 +138,30 @@ public class Login extends javax.swing.JFrame {
     private void loginBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBTNActionPerformed
         String usr = userTF.getText();
         String pass = passTF.getText();
-        TaiKhoanDTO taikhoan =new TaiKhoanDTO();
-       
+        TaiKhoanDTO taikhoan = new TaiKhoanDTO();
+
         try {
             taikhoan = taikhoanBLL.CheckTaiKhoan(usr, pass);
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if (taikhoan==null)
-            JOptionPane.showMessageDialog(rootPane,"Tài khoản không tồn tại !");
-        else
-        {
-            if (taikhoan.getPassword()==null)
-                JOptionPane.showMessageDialog(rootPane,"Mật khẩu không chính xác !");
-            else if (taikhoan.isTinhTrang()==false)
-            {
-                JOptionPane.showMessageDialog(rootPane,"Tài khoản của bạn đã bị vô hiệu hóa ! ");
-            }
-            else 
-            {
-                JOptionPane.showMessageDialog(rootPane,"Đăng nhập thành công !");
-                HomePage hp=new HomePage(taikhoan);
+
+        if (taikhoan == null) {
+            JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại !");
+        } else {
+            if (taikhoan.getPassword() == null) {
+                JOptionPane.showMessageDialog(rootPane, "Mật khẩu không chính xác !");
+            } else if (taikhoan.isTinhTrang() == false) {
+                JOptionPane.showMessageDialog(rootPane, "Tài khoản của bạn đã bị vô hiệu hóa ! ");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công !");
+                HomePage hp = new HomePage(taikhoan);
                 hp.setLocationRelativeTo(null);
                 hp.setVisible(true);
-                this.dispose();
+                this.setVisible(false);
             }
         }
-        
+
     }//GEN-LAST:event_loginBTNActionPerformed
 
     /**
@@ -215,4 +213,10 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel userLB;
     private javax.swing.JTextField userTF;
     // End of variables declaration//GEN-END:variables
+
+    public TaiKhoanDTO getTaiKhoanDTO() {
+        TaiKhoanDTO taiKhoan = new TaiKhoanDTO();
+        taiKhoan.setUsername(userTF.getText());
+        return taiKhoan;
+    }
 }
