@@ -1,20 +1,20 @@
 package DTO;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class HoaDonVeBanDTO {
     private int id;
     private NhanVienDTO idNhanVien;
     private KhachHangDTO idKhachHangLapHoaDon;
-    private LocalDateTime ngayLapHoaDon;
+    private Date ngayLapHoaDon;
     private BigDecimal tongTien;
     private boolean tinhTrang;
 
     public HoaDonVeBanDTO() {
     }
 
-    public HoaDonVeBanDTO(int id, NhanVienDTO idNhanVien, KhachHangDTO idKhachHangLapHoaDon, LocalDateTime ngayLapHoaDon, BigDecimal tongTien, boolean tinhTrang) {
+    public HoaDonVeBanDTO(int id, NhanVienDTO idNhanVien, KhachHangDTO idKhachHangLapHoaDon, Date ngayLapHoaDon, BigDecimal tongTien, boolean tinhTrang) {
         this.id = id;
         this.idNhanVien = idNhanVien;
         this.idKhachHangLapHoaDon = idKhachHangLapHoaDon;
@@ -47,11 +47,11 @@ public class HoaDonVeBanDTO {
         this.idKhachHangLapHoaDon = idKhachHangLapHoaDon;
     }
 
-    public LocalDateTime getNgayLapHoaDon() {
+    public Date getNgayLapHoaDon() {
         return ngayLapHoaDon;
     }
 
-    public void setNgayLapHoaDon(LocalDateTime ngayLapHoaDon) {
+    public void setNgayLapHoaDon(Date ngayLapHoaDon) {
         this.ngayLapHoaDon = ngayLapHoaDon;
     }
 
